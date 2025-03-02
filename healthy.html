@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大学生健康饮食规划</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #98FB98; /* 浅绿色背景 */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #content {
+            background-color: #FFFFFF; /* 白色内容区 */
+            padding: 20px;
+            margin: 20px;
+        }
+
+        #button {
+            background-color: #87CEEB; /* 浅蓝色按钮 */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>大学生健康饮食规划</h1>
+    <div id="content">
+        这是健康饮食规划的相关介绍。
+    </div>
+    <button id="button">点击获取健康饮食选项</button>
+
+    <script>
+        // 获取按钮和内容区域的元素
+        const button = document.getElementById('button');
+        const content = document.getElementById('content');
+        const dietOptions = [
+            "早餐选择全麦面包搭配牛奶和水果",
+            "午餐保证有足够的蛋白质，如鸡胸肉、鱼肉",
+            "晚餐适量摄入蔬菜和粗粮"
+        ];
+        let optionIndex = 0;
+
+        // 为按钮添加点击事件监听器
+        button.addEventListener('click', function () {
+            if (optionIndex < dietOptions.length) {
+                const newOption = document.createElement('p');
+                newOption.textContent = dietOptions[optionIndex];
+                content.appendChild(newOption);
+                optionIndex++;
+            }
+        });
+    </script>
+</body>
+
+</html>
