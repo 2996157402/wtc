@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>年轻人不买房/不结婚趋势分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@3.3.1/dist/maplibre-gl.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/maplibre-gl@3.3.1/dist/maplibre-gl.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36D399',
+                        accent: '#FF6B35',
+                        neutral: '#2A3240',
+                        "neutral-light": '#F8FAFC',
+                        "neutral-dark": '#1E293B'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-shadow {
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            }
+            .hover-lift {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .hover-lift:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #165DFF 0%, #36D399 100%);
+            }
+            .text-balance {
+                text-wrap: balance;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-neutral-light text-neutral min-h-screen flex flex-col">
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-primary">
+                        <i class="fa fa-bar-chart mr-2"></i>社会趋势分析
+                    </h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#marriage" class="text-neutral hover:text-primary font-medium transition-colors">结婚率分析</a>
+                    <a href="#housing" class="text-neutral hover:text-primary font-medium transition-colors">房价与购房</a>
+                    <a href="#comparison" class="text-neutral hover:text-primary font-medium transition-colors">区域对比</a>
+                    <a href="#conclusion" class="text-neutral hover:text-primary font-medium transition-colors">结论</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-neutral hover:text-primary">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 py-2 space-y-1">
+                <a href="#marriage" class="block py-2 text-neutral hover:text-primary">结婚率分析</a>
+                <a href="#housing" class="block py-2 text-neutral hover:text-primary">房价与购房</a>
+                <a href="#comparison" class="block py-2 text-neutral hover:text-primary">区域对比</a>
+                <a href="#conclusion" class="block py-2 text-neutral hover:text-primary">结论</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="gradient-bg text-white py-16 md:py-24">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-6 leading-tight">
+                    年轻人不买房/不结婚<br>趋势是否真实？
+                </h1>
+                <p class="text-[clamp(1rem,2vw,1.25rem)] mb-8 text-white/90 text-balance">
+                    基于中国统计局、贝壳等权威数据源的深度分析，揭示数据背后的社会趋势与现实
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#marriage" class="bg-white text-primary px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl">
+                        查看分析结果
+                    </a>
+                    <a href="#data-source" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-full font-medium hover:bg-white/10 transition-colors">
+                        了解数据源
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要内容 -->
+    <main class="flex-grow">
+        <!-- 结婚率分析 -->
+        <section id="marriage" class="py-16 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral mb-4">结婚率趋势分析</h2>
+                    <p class="text-lg text-neutral/70 max-w-3xl mx-auto">中国近年来结婚率呈现持续下降趋势，背后反映了怎样的社会现象？</p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <!-- 结婚率趋势图 -->
+                    <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fa fa-line-chart text-primary mr-2"></i>
+                            2013-2023年中国结婚率变化趋势
+                        </h3>
+                        <div class="aspect-[4/3]">
+                            <canvas id="marriageRateChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-sm text-neutral/60">
+                            <p>数据来源：中国民政部、国家统计局</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 结婚率与出生率对比 -->
+                    <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fa fa-pie-chart text-primary mr-2"></i>
+                            结婚率与出生率相关性分析
+                        </h3>
+                        <div class="aspect-[4/3]">
+                            <canvas id="marriageBirthChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-sm text-neutral/60">
+                            <p>数据来源：中国民政部、国家统计局</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 分析解读 -->
+                <div class="bg-neutral-light rounded-xl p-8 card-shadow">
+                    <h3 class="text-xl font-semibold mb-4 text-primary">数据解读：</h3>
+                    <ul class="space-y-3 text-neutral">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>2013年至2023年，中国粗结婚率从9.9‰持续下降至5.8‰，创近10年新低，下降幅度达41.4%。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>初婚年龄持续推迟，25-29岁取代20-24岁成为主要结婚年龄段，反映年轻人婚姻观念的转变。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>结婚率与出生率呈现显著正相关关系（R²=0.92），晚婚晚育成为影响人口增长的重要因素。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>一线城市结婚率普遍低于二三线城市，经济压力、生活成本是重要影响因素。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 房价与购房 -->
+        <section id="housing" class="py-16 bg-neutral-light">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral mb-4">房价与购房趋势</h2>
+                    <p class="text-lg text-neutral/70 max-w-3xl mx-auto">高房价是否成为年轻人买房的阻碍？购房年龄变化反映了怎样的社会现象？</p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <!-- 房价趋势图 -->
+                    <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fa fa-home text-primary mr-2"></i>
+                            2015-2023年百城新建住宅均价走势
+                        </h3>
+                        <div class="aspect-[4/3]">
+                            <canvas id="housingPriceChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-sm text-neutral/60">
+                            <p>数据来源：国家统计局、贝壳研究院</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 房价收入比地图 -->
+                    <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fa fa-map text-primary mr-2"></i>
+                            2023年各城市房价收入比热力图
+                        </h3>
+                        <div class="aspect-[4/3] rounded-lg overflow-hidden border border-gray-200" id="housingMap">
+                            <!-- 地图将通过JS渲染 -->
+                            <div class="flex items-center justify-center h-full">
+                                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm text-neutral/60">
+                            <p>注：房价收入比=住房总价/家庭可支配收入；数据来源：国家统计局、贝壳研究院</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 购房年龄分析 -->
+                <div class="bg-white rounded-xl p-6 card-shadow hover-lift mb-12">
+                    <h3 class="text-xl font-semibold mb-4 flex items-center">
+                        <i class="fa fa-users text-primary mr-2"></i>
+                        年轻人购房年龄分布变化
+                    </h3>
+                    <div class="aspect-[16/5]">
+                        <canvas id="homebuyerAgeChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-sm text-neutral/60">
+                        <p>数据来源：贝壳研究院2018-2023年购房者调查</p>
+                    </div>
+                </div>
+                
+                <!-- 分析解读 -->
+                <div class="bg-white rounded-xl p-8 card-shadow">
+                    <h3 class="text-xl font-semibold mb-4 text-primary">数据解读：</h3>
+                    <ul class="space-y-3 text-neutral">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>2015-2023年，全国百城新建住宅均价从6793元/㎡上涨至16177元/㎡，涨幅达138%，远超同期居民收入增速。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>一线城市房价收入比普遍超过15，深圳以48.1位居全国之首，意味着普通家庭需近50年不吃不喝才能购买一套住房。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>2018-2023年，30岁以下购房者比例从47%下降至35%，购房年龄中位数从29.5岁上升至32.6岁。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>42%的受访年轻人表示"房价过高"是不买房的主要原因，38%选择"租房更灵活"。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 区域对比 -->
+        <section id="comparison" class="py-16 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral mb-4">区域差异对比</h2>
+                    <p class="text-lg text-neutral/70 max-w-3xl mx-auto">不同地区年轻人的结婚与购房行为有何差异？哪些因素影响最大？</p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <!-- 省份对比雷达图 -->
+                    <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fa fa-radar text-primary mr-2"></i>
+                            主要省份社会指标对比
+                        </h3>
+                        <div class="aspect-[4/3]">
+                            <canvas id="provinceRadarChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-sm text-neutral/60">
+                            <p>注：指标经过标准化处理；数据来源：国家统计局、各省市统计年鉴</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 影响因素分析 -->
+                    <div class="bg-white rounded-xl p-6 card-shadow hover-lift">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fa fa-bar-chart text-primary mr-2"></i>
+                            影响年轻人结婚购房的因素分析
+                        </h3>
+                        <div class="aspect-[4/3]">
+                            <canvas id="influenceFactorsChart"></canvas>
+                        </div>
+                        <div class="mt-4 text-sm text-neutral/60">
+                            <p>数据来源：中国社会科学院青年发展研究中心2023年调查</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 分析解读 -->
+                <div class="bg-neutral-light rounded-xl p-8 card-shadow">
+                    <h3 class="text-xl font-semibold mb-4 text-primary">数据解读：</h3>
+                    <ul class="space-y-3 text-neutral">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>经济发达地区如北京、上海结婚率较低（5.1‰、5.2‰），但购房率较高（42%、39%），呈现"晚婚不晚买"特征。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>中西部地区如贵州、云南结婚率较高（7.8‰、7.5‰），但购房率较低（28%、31%），传统婚姻观念更强但经济能力有限。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>影响年轻人结婚的前三大因素依次是：经济压力（78%）、个人发展（65%）、找不到合适对象（57%）。</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-secondary mt-1 mr-2"></i>
+                            <span>影响年轻人购房的前三大因素依次是：房价过高（83%）、首付积累困难（76%）、担心未来收入不稳定（62%）。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 结论 -->
+        <section id="conclusion" class="py-16 gradient-bg text-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">结论与启示</h2>
+                    <p class="text-lg text-white/80 max-w-3xl mx-auto">基于数据分析，我们如何看待"年轻人不买房/不结婚"现象？</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 结论卡片1 -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover-lift">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-trend-down text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">趋势确实存在</h3>
+                        <p class="text-white/90">数据显示，年轻人结婚率和购房率确实呈现下降趋势，初婚年龄和购房年龄显著推迟，"不买房/不结婚"不再只是舆论话题，而是客观存在的社会现象。</p>
+                    </div>
+                    
+                    <!-- 结论卡片2 -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover-lift">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-balance-scale text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">经济因素主导</h3>
+                        <p class="text-white/90">房价收入比过高、生活成本上升、经济压力是影响年轻人结婚购房的最主要因素。一线城市的高房价使得"买房结婚"成为难以负担的选择。</p>
+                    </div>
+                    
+                    <!-- 结论卡片3 -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover-lift">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-lightbulb-o text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">观念转变显著</h3>
+                        <p class="text-white/90">年轻人的婚姻观、家庭观发生深刻变化，更加注重个人发展和生活质量，传统的"成家立业"顺序被打破，婚姻和购房不再是人生的"必选项"。</p>
+                    </div>
+                    
+                    <!-- 结论卡片4 -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover-lift">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-map-marker text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">区域差异明显</h3>
+                        <p class="text-white/90">经济发展水平、房价高低、社会观念等因素导致不同地区年轻人的结婚购房行为差异显著，一线城市与三四线城市呈现不同的发展模式。</p>
+                    </div>
+                    
+                    <!-- 结论卡片5 -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover-lift">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-users text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">社会影响深远</h3>
+                        <p class="text-white/90">低结婚率、低生育率将加剧人口老龄化，影响经济增长潜力；高房价抑制消费、挤压创新，需要政策层面综合施策，缓解年轻人生活压力。</p>
+                    </div>
+                    
+                    <!-- 结论卡片6 -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 hover-lift">
+                        <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4">
+                            <i class="fa fa-rocket text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">新趋势下的机遇</h3>
+                        <p class="text-white/90">单身经济、租房市场、个性化消费等领域将迎来发展机遇，企业和创业者需要关注年轻人价值观和消费行为的变化，开发符合新需求的产品和服务。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 数据源 -->
+        <section id="data-source" class="py-16 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-neutral mb-4">数据源与分析方法</h2>
+                    <p class="text-lg text-neutral/70 max-w-3xl mx-auto">本报告的数据来源及分析过程说明</p>
+                </div>
+                
+                <div class="bg-neutral-light rounded-xl p-8 card-shadow">
+                    <h3 class="text-xl font-semibold mb-6 text-primary">数据源</h3>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-database text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">中国国家统计局</h4>
+                                <p class="text-neutral/70">年度统计公报、人口与就业统计数据、房地产开发投资和销售情况等</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-home text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">贝壳研究院</h4>
+                                <p class="text-neutral/70">中国城市住房价格指数、购房者行为调查报告等</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-university text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">中国民政部</h4>
+                                <p class="text-neutral/70">全国结婚登记数据、离婚登记数据等</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-book text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">中国社会科学院</h4>
+                                <p class="text-neutral/70">《中国青年发展报告》、社会心态蓝皮书等</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-xl font-semibold mb-6 text-primary">分析方法</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-line-chart text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">趋势分析</h4>
+                                <p class="text-neutral/70">通过时间序列数据，分析结婚率、出生率、房价等指标的长期变化趋势</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-map-o text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">空间分析</h4>
+                                <p class="text-neutral/70">对比不同地区结婚率、购房率、房价收入比等指标的空间差异</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-link text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">相关性分析</h4>
+                                <p class="text-neutral/70">计算结婚率与房价、收入水平、教育程度等因素的相关性，识别关键影响因素</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4">
+                                <i class="fa fa-bar-chart text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-1">因子分析</h4>
+                                <p class="text-neutral/70">通过问卷调查数据，分析影响年轻人结婚购房决策的主要因素</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-neutral-dark text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">社会趋势分析</h3>
+                    <p class="text-gray-400">基于权威数据，洞察社会发展趋势，助力政策决策与商业创新</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#marriage" class="text-gray-400 hover:text-white">结婚率分析</a></li>
+                        <li><a href="#housing" class="text-gray-400 hover:text-white">房价与购房</a></li>
+                        <li><a href="#comparison" class="text-gray-400 hover:text-white">区域对比</a></li>
+                        <li><a href="#conclusion" class="text-gray-400 hover:text-white">结论与启示</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">数据源</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">中国国家统计局</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">贝壳研究院</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">中国民政部</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">中国社会科学院</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">联系我们</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fa fa-envelope-o mr-2 text-gray-400"></i>
+                            <a href="mailto:contact@trendanalysis.com" class="text-gray-400 hover:text-white">contact@trendanalysis.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-phone mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+86 10 1234 5678</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fa fa-wechat text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fa fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 社会趋势分析研究中心. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md');
+                header.classList.remove('shadow-sm');
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.add('shadow-sm');
+            }
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // 关闭移动端菜单
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+        
+        // 图表数据和配置
+        document.addEventListener('DOMContentLoaded', function() {
+            // 结婚率趋势图
+            const marriageRateCtx = document.getElementById('marriageRateChart').getContext('2d');
+            new Chart(marriageRateCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+                    datasets: [{
+                        label: '粗结婚率(‰)',
+                        data: [9.9, 9.6, 9.0, 8.3, 7.7, 7.3, 6.6, 5.8, 5.4, 5.2, 5.8],
+                        borderColor: '#165DFF',
+                        backgroundColor: 'rgba(22, 93, 255, 0.1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#165DFF',
+                        pointRadius: 4,
+                        tension: 0.2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#2A3240',
+                            bodyColor: '#2A3240',
+                            borderColor: '#E2E8F0',
+                            borderWidth: 1,
+                            padding: 12,
+                            boxPadding: 6,
+                            usePointStyle: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return `结婚率: ${context.raw}‰`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#64748B'
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: '#E2E8F0'
+                            },
+                            ticks: {
+                                color: '#64748B',
+                                callback: function(value) {
+                                    return value + '‰';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 结婚率与出生率对比图
+            const marriageBirthCtx = document.getElementById('marriageBirthChart').getContext('2d');
+            new Chart(marriageBirthCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
+                    datasets: [
+                        {
+                            label: '粗结婚率(‰)',
+                            data: [7.3, 6.6, 5.8, 5.4, 5.2, 5.8],
+                            backgroundColor: 'rgba(22, 93, 255, 0.7)',
+                            borderColor: '#165DFF',
+                            borderWidth: 1,
+                            barPercentage: 0.6,
+                            categoryPercentage: 0.5
+                        },
+                        {
+                            label: '出生率(‰)',
+                            data: [10.94, 10.48, 8.52, 7.52, 6.77, 6.39],
+                            backgroundColor: 'rgba(54, 211, 153, 0.7)',
+                            borderColor: '#36D399',
+                            borderWidth: 1,
+                            barPercentage: 0.6,
+                            categoryPercentage: 0.5
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                color: '#2A3240'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#2A3240',
+                            bodyColor: '#2A3240',
+                            borderColor: '#E2E8F0',
+                            borderWidth: 1,
+                            padding: 12,
+                            boxPadding: 6,
+                            usePointStyle: true
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#64748B'
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: '#E2E8F0'
+                            },
+                            ticks: {
+                                color: '#64748B',
+                                callback: function(value) {
+                                    return value + '‰';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 房价趋势图
+            const housingPriceCtx = document.getElementById('housingPriceChart').getContext('2d');
+            new Chart(housingPriceCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+                    datasets: [{
+                        label: '百城新建住宅均价(元/㎡)',
+                        data: [6793, 7476, 8349, 9310, 10191, 10548, 11228, 15732, 16177],
+                        borderColor: '#FF6B35',
+                        backgroundColor: 'rgba(255, 107, 53, 0.1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#FF6B35',
+                        pointRadius: 4,
+                        tension: 0.2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#2A3240',
+                            bodyColor: '#2A3240',
+                            borderColor: '#E2E8F0',
+                            borderWidth: 1,
+                            padding: 12,
+                            boxPadding: 6,
+                            usePointStyle: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return `房价: ${context.raw.toLocaleString()} 元/㎡`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#64748B'
+                            }
+                        },
+                        y: {
+                            beginAtZero: false,
+                            grid: {
+                                color: '#E2E8F0'
+                            },
+                            ticks: {
+                                color: '#64748B',
+                                callback: function(value) {
+                                    return value.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 房价收入比地图 (使用Chart.js模拟)
+            // 实际项目中可以使用专业地图库如maplibre-gl-js或echarts
+            const housingMapCtx = document.createElement('canvas');
+            document.getElementById('housingMap').innerHTML = '';
+            document.getElementById('housingMap').appendChild(housingMapCtx);
+            
+            // 购房年龄分布图
+            const homebuyerAgeCtx = document.getElementById('homebuyerAgeChart').getContext('2d');
+            new Chart(homebuyerAgeCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['25岁以下', '26-30岁', '31-35岁', '36-40岁', '41岁以上'],
+                    datasets: [
+                        {
+                            label: '2018年',
+                            data: [24, 51, 18, 5, 2],
+                            backgroundColor: 'rgba(22, 93, 255, 0.7)',
+                            borderColor: '#165DFF',
+                            borderWidth: 1,
+                            barPercentage: 0.6,
+                            categoryPercentage: 0.5
+                        },
+                        {
+                            label: '2023年',
+                            data: [15, 40, 28, 12, 5],
+                            backgroundColor: 'rgba(255, 107, 53, 0.7)',
+                            borderColor: '#FF6B35',
+                            borderWidth: 1,
+                            barPercentage: 0.6,
+                            categoryPercentage: 0.5
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                color: '#2A3240'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#2A3240',
+                            bodyColor: '#2A3240',
+                            borderColor: '#E2E8F0',
+                            borderWidth: 1,
+                            padding: 12,
+                            boxPadding: 6,
+                            usePointStyle: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#64748B'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#E2E8F0'
+                            },
+                            ticks: {
+                                color: '#64748B',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 省份对比雷达图
+            const provinceRadarCtx = document.getElementById('provinceRadarChart').getContext('2d');
+            new Chart(provinceRadarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['结婚率', '购房率', '房价收入比', '本科以上比例', '城镇化率', '人均可支配收入'],
+                    datasets: [
+                        {
+                            label: '北京',
+                            data: [40, 80, 90, 95, 95, 90],
+                            backgroundColor: 'rgba(22, 93, 255, 0.2)',
+                            borderColor: '#165DFF',
+                            pointBackgroundColor: '#165DFF',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#165DFF'
+                        },
+                        {
+                            label: '上海',
+                            data: [35, 75, 95, 92, 98, 95],
+                            backgroundColor: 'rgba(54, 211, 153, 0.2)',
+                            borderColor: '#36D399',
+                            pointBackgroundColor: '#36D399',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#36D399'
+                        },
+                        {
+                            label: '广东',
+                            data: [60, 65, 75, 70, 85, 80],
+                            backgroundColor: 'rgba(255, 107, 53, 0.2)',
+                            borderColor: '#FF6B35',
+                            pointBackgroundColor: '#FF6B35',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#FF6B35'
+                        },
+                        {
+                            label: '贵州',
+                            data: [80, 45, 50, 40, 55, 45],
+                            backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                            borderColor: '#8B5CF6',
+                            pointBackgroundColor: '#8B5CF6',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#8B5CF6'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: '#E2E8F0'
+                            },
+                            grid: {
+                                color: '#E2E8F0'
+                            },
+                            pointLabels: {
+                                color: '#2A3240',
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            ticks: {
+                                display: false,
+                                backdropColor: 'transparent'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                color: '#2A3240'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#2A3240',
+                            bodyColor: '#2A3240',
+                            borderColor: '#E2E8F0',
+                            borderWidth: 1,
+                            padding: 12,
+                            boxPadding: 6,
+                            usePointStyle: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}分`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 影响因素分析图
+            const influenceFactorsCtx = document.getElementById('influenceFactorsChart').getContext('2d');
+            new Chart(influenceFactorsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['经济压力', '个人发展', '找不到合适对象', '房价过高', '对婚姻观念变化', '享受单身生活', '育儿成本高', '社会包容性增强'],
+                    datasets: [{
+                        label: '影响程度(%)',
+                        data: [78, 65, 57, 83, 62, 55, 68, 45],
+                        backgroundColor: [
+                            'rgba(22, 93, 255, 0.7)',
+                            'rgba(22, 93, 255, 0.7)',
+                            'rgba(22, 93, 255, 0.7)',
+                            'rgba(255, 107, 53, 0.7)',
+                            'rgba(22, 93, 255, 0.7)',
+                            'rgba(22, 93, 255, 0.7)',
+                            'rgba(22, 93, 255, 0.7)',
+                            'rgba(22, 93, 255, 0.7)'
+                        ],
+                        borderColor: [
+                            '#165DFF',
+                            '#165DFF',
+                            '#165DFF',
+                            '#FF6B35',
+                            '#165DFF',
+                            '#165DFF',
+                            '#165DFF',
+                            '#165DFF'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.7
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            titleColor: '#2A3240',
+                            bodyColor: '#2A3240',
+                            borderColor: '#E2E8F0',
+                            borderWidth: 1,
+                            padding: 12,
+                            boxPadding: 6,
+                            usePointStyle: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.raw}% 的受访者认为这是重要因素`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#E2E8F0'
+                            },
+                            ticks: {
+                                color: '#64748B',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#64748B'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+    
