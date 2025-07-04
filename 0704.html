@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>粽子文化桑基图</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-graph@4.2.1/build/index.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B4513',
+                        secondary: '#2E8B57',
+                        accent: '#CD853F',
+                        light: '#F5DEB3',
+                        dark: '#3C2A21'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .transition-transform {
+                transition-property: transform;
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+                transition-duration: 300ms;
+            }
+            .hover-scale {
+                @apply hover:scale-105 transition-all duration-300;
+            }
+            .chart-loading {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                font-size: 1.2rem;
+                color: #666;
+            }
+            .chart-error {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                font-size: 1.2rem;
+                color: #ff4d4f;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-light/50 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-primary text-white shadow-md fixed w-full z-10 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-line-chart text-2xl"></i>
+                <h1 class="text-xl md:text-2xl font-bold">粽子文化<span class="hidden md:inline">可视化</span></h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="saveButton" class="bg-white text-primary hover:bg-light px-4 py-2 rounded-lg shadow hover-scale flex items-center">
+                    <i class="fa fa-download mr-2"></i>
+                    <span>保存图表</span>
+                </button>
+                <button id="themeToggle" class="bg-white/20 hover:bg-white/30 p-2 rounded-full">
+                    <i class="fa fa-moon-o"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 pt-24 pb-16">
+        <!-- 介绍卡片 -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8 transform transition-all duration-500 hover:shadow-xl">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-primary mb-4 text-shadow">粽子文化桑基图</h2>
+            <p class="text-gray-700 mb-4 text-lg">探索中国传统粽子的丰富多样性，从种类、地区分布、馅料到粽叶的选择，感受传统美食背后的文化差异与联系。</p>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-6">
+                <div class="bg-secondary/10 rounded-lg p-4 border-l-4 border-secondary">
+                    <h3 class="font-semibold text-secondary mb-1">粽子种类</h3>
+                    <p class="text-gray-600">甜粽、地方特色粽、咸粽</p>
+                </div>
+                <div class="bg-secondary/10 rounded-lg p-4 border-l-4 border-secondary">
+                    <h3 class="font-semibold text-secondary mb-1">地区分布</h3>
+                    <p class="text-gray-600">覆盖10个中国省份和自治区</p>
+                </div>
+                <div class="bg-secondary/10 rounded-lg p-4 border-l-4 border-secondary">
+                    <h3 class="font-semibold text-secondary mb-1">馅料选择</h3>
+                    <p class="text-gray-600">梅干菜、干果、海鲜、咸蛋黄等</p>
+                </div>
+                <div class="bg-secondary/10 rounded-lg p-4 border-l-4 border-secondary">
+                    <h3 class="font-semibold text-secondary mb-1">粽叶种类</h3>
+                    <p class="text-gray-600">芦苇叶、箬竹叶、柊叶等</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 图表容器 -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8 relative overflow-hidden">
+            <div class="absolute top-4 right-4 bg-light/80 backdrop-blur-sm rounded-lg p-2 shadow-md z-10">
+                <p class="font-medium text-dark">提示：<span class="text-sm">悬停查看详细信息</span></p>
+            </div>
+            <div class="h-[600px] w-full" id="chartContainer">
+                <div id="chartLoading" class="chart-loading">
+                    <i class="fa fa-circle-o-notch fa-spin mr-2"></i>
+                    <span>图表加载中...</span>
+                </div>
+                <div id="chartError" class="chart-error hidden">
+                    <i class="fa fa-exclamation-triangle mr-2"></i>
+                    <span>图表加载失败，请刷新页面重试</span>
+                </div>
+                <canvas id="sankeyChart" class="hidden"></canvas>
+            </div>
+        </div>
+
+        <!-- 图例 -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h3 class="text-xl font-bold text-primary mb-4">图例说明</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#8B4513]/80 mr-2"></div>
+                    <span class="text-gray-700">甜粽</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#2E8B57]/80 mr-2"></div>
+                    <span class="text-gray-700">地方特色粽</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#CD853F]/80 mr-2"></div>
+                    <span class="text-gray-700">咸粽</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#8B0000]/80 mr-2"></div>
+                    <span class="text-gray-700">新疆</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#483D8B]/80 mr-2"></div>
+                    <span class="text-gray-700">山西</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#008080]/80 mr-2"></div>
+                    <span class="text-gray-700">海南</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#D2691E]/80 mr-2"></div>
+                    <span class="text-gray-700">贵州</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#9400D3]/80 mr-2"></div>
+                    <span class="text-gray-700">湖南</span>
+                </div>
+                <!-- 更多图例项 -->
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#FF8C00]/80 mr-2"></div>
+                    <span class="text-gray-700">山东</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#4B0082]/80 mr-2"></div>
+                    <span class="text-gray-700">广西</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#1E90FF]/80 mr-2"></div>
+                    <span class="text-gray-700">陕西</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#556B2F]/80 mr-2"></div>
+                    <span class="text-gray-700">浙江</span>
+                </div>
+                <div class="flex items-center mb-3">
+                    <div class="w-4 h-4 rounded-full bg-[#B8860B]/80 mr-2"></div>
+                    <span class="text-gray-700">广东</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据说明 -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-xl font-bold text-primary mb-4">数据说明</h3>
+            <p class="text-gray-700 mb-4">本桑基图展示了中国传统粽子在种类、地区、馅料和粽叶四个维度之间的关系。宽度表示相关性强度，颜色区分不同类别。</p>
+            <p class="text-gray-700">数据基于传统粽子文化和地域特色，部分关系为示意性展示，旨在呈现中国粽子文化的多样性。</p>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-bold mb-2">粽子文化可视化</h3>
+                    <p class="text-gray-400 text-sm">探索传统美食背后的文化故事</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-weibo"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-wechat"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-400 text-sm">
+                &copy; 2025 粽子文化研究中心 | 数据仅供演示
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 导航栏滚动效果
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('py-2');
+                    navbar.classList.add('bg-primary/95');
+                    navbar.classList.add('backdrop-blur-sm');
+                } else {
+                    navbar.classList.remove('py-2');
+                    navbar.classList.remove('bg-primary/95');
+                    navbar.classList.remove('backdrop-blur-sm');
+                }
+            });
+
+            // 深色/浅色模式切换
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            let isDarkMode = false;
+            
+            themeToggle.addEventListener('click', function() {
+                isDarkMode = !isDarkMode;
+                if (isDarkMode) {
+                    body.classList.add('bg-gray-900');
+                    body.classList.add('text-white');
+                    themeToggle.innerHTML = '<i class="fa fa-sun-o"></i>';
+                } else {
+                    body.classList.remove('bg-gray-900');
+                    body.classList.remove('text-white');
+                    themeToggle.innerHTML = '<i class="fa fa-moon-o"></i>';
+                }
+                // 重新渲染图表以适应主题变化
+                renderSankeyChart();
+            });
+
+            // 保存图表功能
+            const saveButton = document.getElementById('saveButton');
+            saveButton.addEventListener('click', function() {
+                const chartCanvas = document.getElementById('sankeyChart');
+                if (!chartCanvas || !window.sankeyChart) {
+                    alert('图表尚未加载完成，无法保存');
+                    return;
+                }
+                
+                const link = document.createElement('a');
+                link.download = '粽子文化桑基图.png';
+                link.href = chartCanvas.toDataURL('image/png');
+                link.click();
+                
+                // 添加保存成功动画
+                saveButton.classList.add('bg-green-500', 'text-white');
+                saveButton.innerHTML = '<i class="fa fa-check mr-2"></i><span>保存成功</span>';
+                setTimeout(() => {
+                    saveButton.classList.remove('bg-green-500', 'text-white');
+                    saveButton.innerHTML = '<i class="fa fa-download mr-2"></i><span>保存图表</span>';
+                }, 2000);
+            });
+
+            // 渲染桑基图
+            renderSankeyChart();
+        });
+
+        // 渲染桑基图函数
+        function renderSankeyChart() {
+            // 显示加载状态
+            document.getElementById('chartLoading').classList.remove('hidden');
+            document.getElementById('chartError').classList.add('hidden');
+            document.getElementById('sankeyChart').classList.add('hidden');
+            
+            // 销毁现有图表（如果存在）
+            if (window.sankeyChart) {
+                window.sankeyChart.destroy();
+            }
+
+            // 等待所有资源加载完成
+            window.addEventListener('load', function() {
+                try {
+                    // 检查ChartGraph是否可用
+                    if (!Chart.controllers.sankey) {
+                        throw new Error('ChartJS Sankey插件加载失败');
+                    }
+
+                    // 获取画布
+                    const ctx = document.getElementById('sankeyChart').getContext('2d');
+
+                    // 定义节点
+                    const nodes = [
+                        { id: 'sweet', name: '甜粽', color: '#8B4513' },
+                        { id: 'special', name: '地方特色粽', color: '#2E8B57' },
+                        { id: 'salty', name: '咸粽', color: '#CD853F' },
+                        
+                        { id: 'xj', name: '新疆维吾尔自治区', color: '#8B0000' },
+                        { id: 'sx', name: '山西省', color: '#483D8B' },
+                        { id: 'hn', name: '海南省', color: '#008080' },
+                        { id: 'gz', name: '贵州省', color: '#D2691E' },
+                        { id: 'hnn', name: '湖南省', color: '#9400D3' },
+                        { id: 'sd', name: '山东省', color: '#FF8C00' },
+                        { id: 'gx', name: '广西壮族自治区', color: '#4B0082' },
+                        { id: 'shx', name: '陕西省', color: '#1E90FF' },
+                        { id: 'zj', name: '浙江省', color: '#556B2F' },
+                        { id: 'gd', name: '广东省', color: '#B8860B' },
+                        
+                        { id: 'preserved', name: '梅干菜', color: '#A0522D' },
+                        { id: 'nuts', name: '干果', color: '#8FBC8F' },
+                        { id: 'yogurt', name: '酸奶', color: '#FA8072' },
+                        { id: 'seafood', name: '海鲜', color: '#4682B4' },
+                        { id: 'egg', name: '咸蛋黄', color: '#DAA520' },
+                        { id: 'mushroom', name: '菇类', color: '#98FB98' },
+                        { id: 'beans', name: '豆类', color: '#CD5C5C' },
+                        { id: 'kernel', name: '果仁', color: '#F08080' },
+                        { id: 'meat', name: '肉类', color: '#FF6347' },
+                        
+                        { id: 'reed', name: '芦苇叶', color: '#6B8E23' },
+                        { id: 'indocalamus', name: '箬竹叶', color: '#3CB371' },
+                        { id: 'sauropus', name: '柊叶', color: '#2E8B57' },
+                        { id: 'banana', name: '芭蕉叶', color: '#8FBC8F' },
+                        { id: 'lotus', name: '荷叶', color: '#228B22' },
+                        { id: 'oak', name: '槲树叶', color: '#556B2F' }
+                    ];
+
+                    // 定义链接（关系）
+                    const links = [
+                        // 粽子种类 -> 地区
+                        { source: 'sweet', target: 'xj', value: 8 },
+                        { source: 'sweet', target: 'sx', value: 6 },
+                        { source: 'sweet', target: 'hn', value: 4 },
+                        { source: 'special', target: 'gz', value: 9 },
+                        { source: 'special', target: 'hnn', value: 8 },
+                        { source: 'special', target: 'sd', value: 7 },
+                        { source: 'special', target: 'gx', value: 8 },
+                        { source: 'salty', target: 'shx', value: 5 },
+                        { source: 'salty', target: 'zj', value: 10 },
+                        { source: 'salty', target: 'gd', value: 9 },
+                        
+                        // 地区 -> 馅料
+                        { source: 'xj', target: 'nuts', value: 7 },
+                        { source: 'xj', target: 'yogurt', value: 5 },
+                        { source: 'sx', target: 'beans', value: 8 },
+                        { source: 'hn', target: 'seafood', value: 6 },
+                        { source: 'hn', target: 'nuts', value: 4 },
+                        { source: 'gz', target: 'preserved', value: 9 },
+                        { source: 'hnn', target: 'meat', value: 10 },
+                        { source: 'sd', target: 'kernel', value: 7 },
+                        { source: 'gx', target: 'mushroom', value: 8 },
+                        { source: 'shx', target: 'beans', value: 6 },
+                        { source: 'zj', target: 'egg', value: 10 },
+                        { source: 'zj', target: 'meat', value: 8 },
+                        { source: 'gd', target: 'egg', value: 9 },
+                        { source: 'gd', target: 'meat', value: 9 },
+                        
+                        // 馅料 -> 粽叶
+                        { source: 'preserved', target: 'indocalamus', value: 8 },
+                        { source: 'nuts', target: 'reed', value: 7 },
+                        { source: 'yogurt', target: 'lotus', value: 6 },
+                        { source: 'seafood', target: 'sauropus', value: 8 },
+                        { source: 'egg', target: 'indocalamus', value: 10 },
+                        { source: 'mushroom', target: 'banana', value: 7 },
+                        { source: 'beans', target: 'oak', value: 8 },
+                        { source: 'kernel', target: 'indocalamus', value: 7 },
+                        { source: 'meat', target: 'indocalamus', value: 9 }
+                    ];
+
+                    // 创建图表
+                    window.sankeyChart = new Chart(ctx, {
+                        type: 'sankey',
+                        data: {
+                            datasets: [{
+                                label: '粽子文化关系图',
+                                nodes: nodes,
+                                links: links,
+                                colors: {
+                                    links: 'source' // 链接颜色继承自源节点
+                                }
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        title: function(context) {
+                                            return context[0].raw.name || '';
+                                        },
+                                        label: function(context) {
+                                            if (context.raw.target) {
+                                                return `→ ${context.raw.target.name}: ${context.raw.value}`;
+                                            } else if (context.raw.source) {
+                                                return `${context.raw.source.name} →: ${context.raw.value}`;
+                                            }
+                                            return '';
+                                        }
+                                    }
+                                },
+                                legend: {
+                                    display: false
+                                }
+                            },
+                            sankey: {
+                                node: {
+                                    width: 20,
+                                    padding: 10,
+                                    colors: {
+                                        border: 'rgba(0, 0, 0, 0.1)',
+                                        hover: {
+                                            background: 'rgba(255, 255, 255, 0.8)',
+                                            border: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                },
+                                link: {
+                                    opacity: 0.4,
+                                    colors: {
+                                        flow: 'gradient'
+                                    }
+                                },
+                                layout: {
+                                    iterations: 32
+                                }
+                            },
+                            animation: {
+                                duration: 1000,
+                                easing: 'easeOutQuart'
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false
+                        }
+                    });
+
+                    // 显示图表，隐藏加载状态
+                    document.getElementById('chartLoading').classList.add('hidden');
+                    document.getElementById('sankeyChart').classList.remove('hidden');
+                    
+                    // 为了确保兼容性，在图表渲染完成后添加一个事件
+                    window.sankeyChart.render();
+                } catch (error) {
+                    console.error('桑基图渲染失败:', error);
+                    document.getElementById('chartLoading').classList.add('hidden');
+                    document.getElementById('chartError').classList.remove('hidden');
+                    
+                    // 在错误信息中显示具体错误
+                    const errorElement = document.getElementById('chartError');
+                    errorElement.innerHTML = `
+                        <i class="fa fa-exclamation-triangle mr-2"></i>
+                        <span>图表加载失败: ${error.message}</span>
+                    `;
+                }
+            });
+        }
+    </script>
+</body>
+</html>    
