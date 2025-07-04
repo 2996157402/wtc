@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>粽子桑基图</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            margin: 20px;
+        }
+        #saveBtn {
+            margin-bottom: 10px;
+            padding: 10px 16px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h2>粽子制作流向桑基图</h2>
+<button id="saveBtn">📥 一键保存图像</button>
+<div id="sankey"></div>
+
+<script>
+    const data = {
+        type: "sankey",
+        orientation: "h",
+        node: {
+            pad: 15,
+            thickness: 20,
+            line: { color: "black", width: 0.5 },
+            label: [
+                // 第一列：粽子种类
+                "甜粽", "地方特色粽", "咸粽",
+
+                // 第二列：地区
+                "新疆", "山西", "海南", "贵州", "湖南", "山东", "广西", "陕西", "浙江", "广东",
+
+                // 第三列：馅料
+                "梅干菜", "干果", "酸奶", "海鲜", "咸蛋黄", "菇类", "豆类", "果仁", "肉类",
+
+                // 第四列：粽叶种类
+                "芦苇叶", "箬竹叶", "柊叶", "芭蕉叶", "荷叶", "槲树叶"
+            ],
+            color: []
+        },
+        link: {
+            source: [
+                0, 0, 1, 1, 2, 2,   // 粽子种类 -> 地区
+                3, 4, 5, 6, 7, 8, 9, 10, 11,  // 地区 -> 馅料
+                12, 13, 14, 15, 16, 17, 18,  // 馅料 -> 粽叶
+            ],
+            target: [
+                3, 4, 5, 6, 7, 8,   // 地区索引起始为3
+                12, 13, 14, 15, 16, 17, 18, 18, 12,  // 馅料索引起始为12
+                19, 20, 21, 22, 23, 24, 19,  // 粽叶索引起始为19
+            ],
+            value: [
+                8, 4, 5, 6, 10, 7,
+                3, 5, 4, 6, 5, 3, 4, 3, 2,
+                6, 5, 3, 2, 4, 3, 2
+            ]
+        }
+    };
+
+    const layout = {
+        title: "粽子种类-地区-馅料-粽叶 桑基图",
+        font: { size: 14 }
+    };
+
+    Plotly.newPlot("sankey", [data], layout);
+
+    // 一键保存按钮功能
+    document.getElementById("saveBtn").onclick = function () {
+        Plotly.downloadImage("sankey", {format: "png", width: 1000, height: 600, filename: "zongzi_sankey"});
+    };
+</script>
+
+</body>
+</html>
