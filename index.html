@@ -1,0 +1,3059 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="30-Minute Miracle: How Chinese Food Delivery Changes Daily Life — An in-depth convergent international report exploring China's delivery ecosystem through the stories of consumers, riders, and cross-national observers.">
+<meta name="author" content="Wang Tianci, Guo Yiwei, Liu Shujing">
+<title>30分钟的奇迹 · 中国外卖如何改变日常生活 | 30-Minute Miracle</title>
+
+<!-- All CSS inlined -->
+<style>
+/* === reset.css === */
+/* ===== CSS Reset ===== */
+/* Based on modern-normalize + custom additions */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: break-word;
+}
+
+p {
+  overflow-wrap: break-word;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-primary);
+  outline-offset: 2px;
+}
+
+/* Remove all animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* === variables.css === */
+/* ===== CSS Custom Properties ===== */
+:root {
+  /* === Brand Colors === */
+  --c-primary: #e8551a;
+  --c-primary-light: #f0973b;
+  --c-primary-dark: #c74612;
+  --c-accent: #f0973b;
+  --c-accent-light: #fbd5c0;
+
+  /* === Neutrals === */
+  --c-dark: #1a1a2e;
+  --c-text: #2c2c2c;
+  --c-muted: #6b6b6b;
+  --c-light-muted: #999999;
+  --c-bg: #fafaf8;
+  --c-card: #ffffff;
+  --c-border: #e8e8e4;
+  --c-border-light: #f0f0ec;
+
+  /* === Semantic Colors === */
+  --c-success: #22c55e;
+  --c-warning: #f59e0b;
+  --c-error: #ef4444;
+  --c-info: #3b82f6;
+  --c-rider: #2196F3;
+
+  /* === Typography === */
+  --font-cn: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-en: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+
+  /* === Spacing Scale === */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* === Layout === */
+  --max-width: 960px;
+  --max-width-wide: 1200px;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* === Shadows === */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
+
+  /* === Transitions === */
+  --transition-fast: 150ms ease;
+  --transition: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* === Z-Index Scale === */
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+}
+
+/* === layout.css === */
+/* ===== Layout: Grid & Flexbox Primitives ===== */
+
+/* === Container === */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.container--wide {
+  max-width: var(--max-width-wide);
+}
+
+/* === Sections === */
+.section {
+  padding: var(--space-4xl) 0;
+  position: relative;
+}
+
+.section--alt {
+  background: var(--c-card);
+}
+
+.section--dark {
+  background: var(--c-dark);
+  color: #fff;
+}
+
+.section--hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+/* === Section Header === */
+.section__label {
+  display: inline-block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--c-primary);
+  margin-bottom: var(--space-sm);
+  font-weight: 700;
+}
+
+.section__title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--c-dark);
+  margin-bottom: var(--space-sm);
+}
+
+.section__desc {
+  color: var(--c-muted);
+  margin-bottom: var(--space-xl);
+  max-width: 600px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* === Grid Systems === */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+
+/* === Flex Utilities === */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+.gap-xl { gap: var(--space-xl); }
+
+/* === Spacing Utilities === */
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+.mt-2xl { margin-top: var(--space-2xl); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+
+/* === Text Utilities === */
+.text-center { text-align: center; }
+.text-muted { color: var(--c-muted); }
+.text-sm { font-size: 0.85rem; }
+.text-xs { font-size: 0.75rem; }
+
+/* === Divider === */
+.divider {
+  border: 0;
+  height: 1px;
+  background: var(--c-border);
+  margin: var(--space-2xl) 0;
+}
+
+/* ===== Mobile (< 768px) ===== */
+@media (max-width: 767px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: var(--space-2xl) 0;
+  }
+
+  .container {
+    padding: 0 var(--space-md);
+  }
+
+  .section--hero {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* ===== Tablet (768px - 1023px) ===== */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ===== Desktop (1024px+) ===== */
+@media (min-width: 1024px) {
+  .container {
+    padding: 0;
+  }
+}
+
+/* === components.css === */
+/* ===== Reusable Component Styles ===== */
+
+/* === Language Switcher === */
+.lang-bar {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  z-index: var(--z-sticky);
+  display: flex;
+  gap: 4px;
+  background: var(--c-card);
+  border-radius: var(--radius-full);
+  padding: 3px;
+  box-shadow: var(--shadow-md);
+}
+
+.lang-bar__btn {
+  border: none;
+  background: none;
+  padding: 5px 14px;
+  border-radius: 17px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-muted);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.lang-bar__btn:hover {
+  color: var(--c-text);
+}
+
+.lang-bar__btn--active {
+  background: var(--c-primary);
+  color: #fff;
+}
+
+.lang-bar__btn--active:hover {
+  color: #fff;
+}
+
+/* === Navigation Dots === */
+.nav-dots {
+  position: fixed;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-sticky);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nav-dots__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c-border);
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  position: relative;
+}
+
+.nav-dots__dot:hover {
+  background: var(--c-primary-light);
+  transform: scale(1.3);
+}
+
+.nav-dots__dot--active {
+  background: var(--c-primary);
+  transform: scale(1.3);
+}
+
+.nav-dots__tooltip {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--c-dark);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+.nav-dots__dot:hover .nav-dots__tooltip {
+  opacity: 1;
+}
+
+/* === Card === */
+.card {
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow);
+}
+
+.card--accent {
+  border-left: 4px solid var(--c-primary);
+}
+
+.card--dashed {
+  border: 2px dashed var(--c-border);
+}
+
+/* === Story Outline Card === */
+.outline-card {
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.outline-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.outline-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.outline-card__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--c-primary);
+  color: #fff;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.outline-card__title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--c-dark);
+}
+
+.outline-card__desc {
+  color: var(--c-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+/* Quote within outline card */
+.outline-card__quote {
+  padding: var(--space-md);
+  background: #fff8f0;
+  border-left: 3px solid var(--c-accent);
+  font-size: 0.95rem;
+  color: var(--c-dark);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.outline-card__quote .attr {
+  font-size: 0.8rem;
+  color: var(--c-muted);
+  font-style: normal;
+  margin-top: var(--space-xs);
+  display: block;
+}
+
+.outline-card__media {
+  font-size: 12px;
+  color: var(--c-accent);
+  font-weight: 500;
+}
+
+/* === Quote Highlight === */
+.quote-highlight {
+  background: var(--c-card);
+  border: 2px solid var(--c-accent);
+  border-radius: var(--radius);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.quote-highlight::before {
+  content: '"';
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  font-size: 48px;
+  color: var(--c-accent-light);
+  font-family: Georgia, serif;
+  line-height: 1;
+  opacity: 0.6;
+}
+
+.quote-highlight__text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--c-dark);
+  line-height: 1.6;
+  padding-left: var(--space-lg);
+}
+
+.quote-highlight__attr {
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  margin-top: var(--space-sm);
+  padding-left: var(--space-lg);
+}
+
+.quote-highlight__context {
+  font-size: 0.85rem;
+  color: var(--c-primary);
+  margin-top: var(--space-xs);
+  padding-left: var(--space-lg);
+  font-style: italic;
+}
+
+/* === Chart Card === */
+.chart-card {
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow);
+}
+
+.chart-card__title {
+  font-size: 0.95rem;
+  color: var(--c-dark);
+  margin-bottom: var(--space-xs);
+  font-weight: 700;
+}
+
+.chart-card__wrap {
+  width: 100%;
+  height: 340px;
+}
+
+.chart-card__note {
+  font-size: 11px;
+  color: var(--c-muted);
+  text-align: center;
+  margin-top: var(--space-sm);
+}
+
+/* === Interview Card === */
+.interview-card {
+  background: var(--c-card);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow);
+}
+
+.interview-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.interview-card__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.interview-card__name {
+  font-size: 1rem;
+  color: var(--c-dark);
+  margin: 0;
+  font-weight: 700;
+}
+
+.interview-card__meta {
+  font-size: 0.8rem;
+  color: var(--c-muted);
+}
+
+.interview-card__qa {
+  margin-bottom: var(--space-sm);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.interview-card__qa-label {
+  color: var(--c-primary);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+/* === Quiz Component === */
+.quiz-box {
+  background: var(--c-card);
+  border: 2px dashed var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.quiz-box__question {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+  color: var(--c-dark);
+}
+
+.quiz-box__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+}
+
+.quiz-box__opt {
+  padding: 10px 24px;
+  border: 2px solid var(--c-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+  background: #fff;
+}
+
+.quiz-box__opt:hover {
+  border-color: var(--c-primary-light);
+  color: var(--c-primary);
+}
+
+.quiz-box__opt--selected {
+  border-color: var(--c-primary);
+  color: var(--c-primary);
+  background: #fff8f0;
+}
+
+.quiz-box__result {
+  display: none;
+  padding: var(--space-lg);
+  background: #fff8f0;
+  border-radius: var(--radius);
+  text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.quiz-box__result--show {
+  display: block;
+}
+
+.quiz-box__progress {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+}
+
+.quiz-box__progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-border);
+  transition: background var(--transition-fast);
+}
+
+.quiz-box__progress-dot--done {
+  background: var(--c-primary);
+}
+
+.quiz-box__progress-dot--current {
+  background: var(--c-accent);
+  transform: scale(1.4);
+}
+
+/* === Share Card === */
+.share-card {
+  background: linear-gradient(135deg, #fff8f0 0%, #ffe8d6 100%);
+  border-radius: var(--radius);
+  padding: var(--space-xl);
+  text-align: center;
+  display: none;
+  max-width: 420px;
+  margin: var(--space-lg) auto 0;
+  box-shadow: var(--shadow-md);
+}
+
+.share-card--show {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+.share-card__icon {
+  font-size: 48px;
+  margin-bottom: var(--space-sm);
+}
+
+.share-card__label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--c-dark);
+}
+
+.share-card__desc {
+  font-size: 0.9rem;
+  color: var(--c-muted);
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.share-card__btn {
+  display: inline-block;
+  padding: 10px 28px;
+  background: var(--c-primary);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.share-card__btn:hover {
+  background: var(--c-primary-dark);
+}
+
+/* === Progress Bar === */
+.progress-bar {
+  height: 8px;
+  background: var(--c-border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: var(--space-md) 0;
+}
+
+.progress-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--c-primary), var(--c-accent));
+  border-radius: 4px;
+  transition: width 0.8s ease;
+  width: 0;
+}
+
+.progress-bar__label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: var(--space-xs);
+}
+
+/* === Tag === */
+.tag {
+  display: inline-block;
+  background: var(--c-primary);
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.tag--outline {
+  background: transparent;
+  border: 1.5px solid var(--c-primary);
+  color: var(--c-primary);
+}
+
+/* === Button === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 10px 24px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: var(--c-primary);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--c-primary-dark);
+}
+
+.btn--outline {
+  border: 2px solid var(--c-primary);
+  color: var(--c-primary);
+  background: transparent;
+}
+
+.btn--outline:hover {
+  background: var(--c-primary);
+  color: #fff;
+}
+
+/* === Scroll Hint === */
+.scroll-hint {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: var(--c-muted);
+  animation: bounce 2s infinite;
+  cursor: default;
+}
+
+/* === Map Container === */
+.map-container {
+  width: 100%;
+  height: 420px;
+  border-radius: var(--radius);
+  z-index: var(--z-base);
+  border: 1px solid var(--c-border);
+}
+
+/* === Video Wrapper === */
+.video-wrapper {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  box-shadow: var(--shadow-md);
+}
+
+.video-wrapper video {
+  width: 100%;
+  display: block;
+}
+
+.video-wrapper__placeholder {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-dark);
+  color: var(--c-muted);
+  font-size: 0.9rem;
+}
+
+/* === Gallery Grid === */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+}
+
+.gallery-grid__item {
+  aspect-ratio: 4 / 3;
+  background: var(--c-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+
+.gallery-grid__item:hover {
+  transform: scale(1.03);
+}
+
+.gallery-grid__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* === Counter Animation === */
+.counter {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: var(--c-primary);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+
+/* === Keyframes === */
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Scroll-triggered animation === */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === Data source badge === */
+.source-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--c-muted);
+  background: var(--c-bg);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+/* === Mobile adjustments === */
+@media (max-width: 767px) {
+  .chart-card__wrap {
+    height: 260px;
+  }
+
+  .map-container {
+    height: 300px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .quote-highlight__text {
+    font-size: 1rem;
+  }
+
+  .outline-card {
+    padding: var(--space-md);
+  }
+
+  .nav-dots {
+    right: 8px;
+    gap: 8px;
+  }
+
+  .nav-dots__dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .quiz-box {
+    padding: var(--space-md);
+  }
+
+  .quiz-box__opt {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+}
+
+/* === i18n.css === */
+/* ===== i18n Language Display Rules ===== */
+
+/* Default: show Chinese, hide English */
+html:not([lang="en"]) .en {
+  display: none !important;
+}
+
+/* English mode: show English, hide Chinese */
+html[lang="en"] .zh {
+  display: none !important;
+}
+
+/* Font stack by language */
+html:not([lang="en"]) body {
+  font-family: var(--font-cn);
+}
+
+html[lang="en"] body {
+  font-family: var(--font-en);
+}
+
+/* Chinese-specific typography adjustments */
+html:not([lang="en"]) {
+  --line-height-multiplier: 1.8;
+}
+
+html[lang="en"] {
+  --line-height-multiplier: 1.65;
+}
+
+/* CJK punctuation adjustments */
+html:not([lang="en"]) .quote-highlight__text,
+html:not([lang="en"]) .outline-card__desc {
+  text-align: justify;
+  text-justify: inter-character;
+}
+
+/* English text alignment */
+html[lang="en"] .quote-highlight__text,
+html[lang="en"] .outline-card__desc {
+  text-align: left;
+}
+
+/* Lang-specific em-dash style */
+html:not([lang="en"]) .attr::before {
+  content: "—— ";
+}
+
+html[lang="en"] .attr::before {
+  content: "— ";
+}
+
+/* Bilingual inline spacing */
+html[lang="en"] .cn-inline {
+  font-family: var(--font-cn);
+}
+
+html:not([lang="en"]) .en-inline {
+  font-family: var(--font-en);
+}
+
+</style>
+
+<!-- External Libraries (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- Preconnect for faster CDN -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://unpkg.com">
+</head>
+<body>
+
+<!-- ===== Language Switcher ===== -->
+<div class="lang-bar" role="group" aria-label="Language switcher">
+  <button id="btn-zh" class="lang-bar__btn lang-bar__btn--active" data-i18n-aria="lang_zh" aria-label="Switch to Chinese">中</button>
+  <button id="btn-en" class="lang-bar__btn" data-i18n-aria="lang_en" aria-label="Switch to English">EN</button>
+</div>
+
+<!-- ===== Hero / Scene 0: Opening ===== -->
+<section class="section section--hero" id="scene-intro">
+  <span class="tag" data-i18n>hero_tag</span>
+  <h1 style="font-size:clamp(2rem,5vw,3.4rem);font-weight:800;color:var(--c-dark);line-height:1.2;margin-top:16px">
+    <span data-i18n>hero_title_line1</span>
+  </h1>
+  <p style="font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--c-primary);font-weight:600;margin-top:8px" data-i18n>hero_title_line2</p>
+  <p class="section__desc" style="margin-top:16px;max-width:520px;text-align:center" data-i18n>hero_subtitle</p>
+  <p class="text-sm text-muted" style="margin-top:24px" data-i18n>hero_meta</p>
+  <div class="scroll-hint" data-i18n>hero_scroll</div>
+</section>
+
+<!-- ===== Scene 0b: Prologue Narrative ===== -->
+<section class="section" id="scene-prologue">
+  <div class="container">
+    <div class="section__label" data-i18n>s0_label</div>
+    <h2 class="section__title" data-i18n>s0_title</h2>
+    <div class="card animate-on-scroll" style="max-width:720px;margin:0 auto">
+      <p style="font-size:1rem;line-height:1.85;margin-bottom:16px;color:var(--c-text)" data-i18n>s0_p1</p>
+      <p style="font-size:1rem;line-height:1.85;margin-bottom:16px;color:var(--c-text)" data-i18n>s0_p2</p>
+      <p style="font-size:1rem;line-height:1.85;margin-bottom:16px;color:var(--c-text)" data-i18n>s0_p3</p>
+      <div style="padding:20px;background:linear-gradient(135deg,#fff8f0,#ffe8d6);border-radius:var(--radius);margin-top:20px">
+        <p style="font-size:1.15rem;font-weight:700;color:var(--c-dark);line-height:1.7;text-align:center" data-i18n>s0_hook</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Scene 1: Data Opening ===== -->
+<section class="section section--alt" id="scene-data">
+  <div class="container">
+    <div class="section__label" data-i18n>s1_label</div>
+    <h2 class="section__title" data-i18n>s1_title</h2>
+    <p class="section__desc" data-i18n>s1_desc</p>
+
+    <!-- Animated counters -->
+    <div class="grid-3 animate-on-scroll" style="margin-bottom:var(--space-2xl)">
+      <div class="card text-center">
+        <div class="counter" data-target="8230" data-duration="2500">0</div>
+        <p class="text-sm text-muted mt-sm"><span class="zh">亿元 · 2025年中国外卖市场规模</span><span class="en">100M RMB · China delivery market 2025</span></p>
+      </div>
+      <div class="card text-center">
+        <div class="counter" data-target="20" data-duration="1800">0</div>
+        <p class="text-sm text-muted mt-sm"><span class="zh">分钟 · 中国平均配送时间</span><span class="en">minutes · Avg delivery time in China</span></p>
+      </div>
+      <div class="card text-center">
+        <div class="counter" data-target="7" data-duration="1500">0</div>
+        <p class="text-sm text-muted mt-sm"><span class="zh">百万 · 中国外卖骑手总数</span><span class="en">million · Total delivery riders in China</span></p>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="grid-2">
+      <div class="chart-card animate-on-scroll">
+        <h4 class="chart-card__title" data-i18n>s1_chart_time_title</h4>
+        <div class="chart-card__wrap" id="chart-delivery-time"></div>
+        <p class="chart-card__note" data-i18n>s1_chart_time_note</p>
+      </div>
+      <div class="chart-card animate-on-scroll">
+        <h4 class="chart-card__title" data-i18n>s1_chart_fee_title</h4>
+        <div class="chart-card__wrap" id="chart-fee"></div>
+        <p class="chart-card__note" data-i18n>s1_chart_fee_note</p>
+      </div>
+    </div>
+
+    <div class="chart-card animate-on-scroll mt-lg" style="max-width:720px;margin-left:auto;margin-right:auto">
+      <h4 class="chart-card__title" data-i18n>s1_chart_scale_title</h4>
+      <div class="chart-card__wrap" id="chart-scale"></div>
+      <p class="chart-card__note" data-i18n>s1_chart_scale_note</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Scene 2: User Story — Mr. Qi ===== -->
+<section class="section" id="scene-user">
+  <div class="container">
+    <div class="section__label" data-i18n>s2_label</div>
+    <h2 class="section__title" data-i18n>s2_title</h2>
+    <p class="section__desc" data-i18n>s2_desc</p>
+
+    <div class="outline-card animate-on-scroll">
+      <div class="outline-card__header">
+        <span class="outline-card__num">1</span>
+        <span class="outline-card__title"><span class="zh">人物聚焦：七同学</span><span class="en">Profile: Mr. Qi</span></span>
+      </div>
+      <p class="outline-card__desc" data-i18n>s2_p1</p>
+      <p class="outline-card__desc" data-i18n>s2_p2</p>
+      <p class="outline-card__desc" data-i18n>s2_p3</p>
+      <p class="outline-card__desc" data-i18n>s2_p4</p>
+      <p class="outline-card__desc" data-i18n>s2_p5</p>
+    </div>
+
+    <!-- Key quotes -->
+    <div class="quote-highlight animate-on-scroll">
+      <p class="quote-highlight__text" data-i18n>s2_quote1</p>
+      <p class="quote-highlight__attr" data-i18n>s2_quote1_attr</p>
+    </div>
+
+    <div class="quote-highlight animate-on-scroll">
+      <p class="quote-highlight__text" data-i18n>s2_quote2</p>
+      <p class="quote-highlight__attr" data-i18n>s2_quote2_attr</p>
+    </div>
+
+    <!-- Interview Card -->
+    <div class="interview-card animate-on-scroll" style="max-width:640px;margin:0 auto">
+      <div class="interview-card__header">
+        <div class="interview-card__avatar">七</div>
+        <div>
+          <h4 class="interview-card__name"><span class="zh">七同学 · 中国大学生</span><span class="en">Mr. Qi · Chinese University Student</span></h4>
+          <p class="interview-card__meta"><span class="zh">大二 · 高频外卖用户 · 月均消费约1000元 · 采访于2026年5月</span><span class="en">Sophomore · Heavy delivery user · ~¥1000/month · Interviewed May 2026</span></p>
+        </div>
+      </div>
+      <div class="interview-card__qa">
+        <span class="interview-card__qa-label"><span class="zh">核心发现：</span><span class="en">Key Finding: </span></span>
+        <span class="zh">几乎每天点外卖，以美团为主。将外卖视为"中国速度"的日常体现。消费行为具有典型的Z世代特征：优惠敏感、品类边界模糊、对骑手持"感谢但不深交"的态度。</span>
+        <span class="en">Orders almost daily, primarily via Meituan. Views delivery as the everyday embodiment of "China speed." Consumption patterns show typical Gen-Z traits: coupon sensitivity, blurred category boundaries, and a "grateful but distant" attitude toward riders.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Scene 3: Rider Story — Wang Jianguo ===== -->
+<section class="section section--alt" id="scene-rider">
+  <div class="container">
+    <div class="section__label" data-i18n>s3_label</div>
+    <h2 class="section__title" data-i18n>s3_title</h2>
+    <p class="section__desc" data-i18n>s3_desc</p>
+
+    <div class="outline-card animate-on-scroll">
+      <div class="outline-card__header">
+        <span class="outline-card__num">2</span>
+        <span class="outline-card__title"><span class="zh">人物聚焦：王建国</span><span class="en">Profile: Wang Jianguo</span></span>
+      </div>
+      <p class="outline-card__desc" data-i18n>s3_p1</p>
+      <p class="outline-card__desc" data-i18n>s3_p2</p>
+      <p class="outline-card__desc" data-i18n>s3_p3</p>
+      <p class="outline-card__desc" data-i18n>s3_p4</p>
+      <p class="outline-card__desc" data-i18n>s3_p5</p>
+      <p class="outline-card__desc" data-i18n>s3_p6</p>
+    </div>
+
+    <!-- Rider quotes -->
+    <div class="quote-highlight animate-on-scroll">
+      <p class="quote-highlight__text" data-i18n>s3_quote1</p>
+      <p class="quote-highlight__attr" data-i18n>s3_quote1_attr</p>
+    </div>
+    <div class="quote-highlight animate-on-scroll">
+      <p class="quote-highlight__text" data-i18n>s3_quote2</p>
+      <p class="quote-highlight__attr" data-i18n>s3_quote2_attr</p>
+    </div>
+    <div class="quote-highlight animate-on-scroll">
+      <p class="quote-highlight__text" data-i18n>s3_quote3</p>
+      <p class="quote-highlight__attr" data-i18n>s3_quote3_attr</p>
+    </div>
+
+    <!-- Rider interview card -->
+    <div class="interview-card animate-on-scroll" style="max-width:640px;margin:0 auto var(--space-xl)">
+      <div class="interview-card__header">
+        <div class="interview-card__avatar" style="background:var(--c-rider)">王</div>
+        <div>
+          <h4 class="interview-card__name"><span class="zh">王建国 · 美团专送骑手</span><span class="en">Wang Jianguo · Meituan Dedicated Rider</span></h4>
+          <p class="interview-card__meta"><span class="zh">42岁 · 河南周口人 · 从业3年 · 日均40-50单 · 采访于2026年5月17日</span><span class="en">Age 42 · From Zhoukou, Henan · 3 years experience · 40-50 orders/day · Interviewed May 17, 2026</span></p>
+        </div>
+      </div>
+      <div class="interview-card__qa">
+        <span class="interview-card__qa-label"><span class="zh">核心发现：</span><span class="en">Key Finding: </span></span>
+        <span class="zh">从建筑工人转行送外卖，月收入约7000-8000元。午高峰是全天最紧张的时段，2小时需完成约15单。对平台算法了解有限但服从性高。与消费者的关系停留在功能性层面，但个别的善意举动（如一杯热奶茶）能带来持久的温暖记忆。</span>
+        <span class="en">Switched from construction work to delivery, earning ¥7000-8000/month. The 2-hour lunch rush is the most intense period with ~15 orders. Limited understanding of platform algorithms but high compliance. Customer relationships are mostly functional, but rare acts of kindness (like a cup of hot tea) create lasting memories.</span>
+      </div>
+    </div>
+
+    <!-- Rider map + income chart -->
+    <h3 class="mb-md text-center" data-i18n>s3_map_title</h3>
+    <div id="map" class="map-container animate-on-scroll"></div>
+    <p class="chart-card__note mt-sm"><span class="zh">底图：高德地图 · 配送路线基于骑手App轨迹截图重建 · 海淀区校园周边</span><span class="en">Basemap: Gaode · Route reconstructed from rider app GPS screenshots · Haidian District campus area</span></p>
+
+    <div class="chart-card animate-on-scroll mt-lg" style="max-width:560px;margin:var(--space-xl) auto 0">
+      <h4 class="chart-card__title" data-i18n>s3_chart_income_title</h4>
+      <div class="chart-card__wrap" id="chart-rider-income"></div>
+      <p class="chart-card__note" data-i18n>s3_chart_income_note</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Scene 4: Contrast — Mr. Fan ===== -->
+<section class="section" id="scene-contrast">
+  <div class="container">
+    <div class="section__label" data-i18n>s4_label</div>
+    <h2 class="section__title" data-i18n>s4_title</h2>
+    <p class="section__desc" data-i18n>s4_desc</p>
+
+    <div class="outline-card animate-on-scroll">
+      <div class="outline-card__header">
+        <span class="outline-card__num">3</span>
+        <span class="outline-card__title"><span class="zh">人物聚焦：范同学</span><span class="en">Profile: Mr. Fan</span></span>
+      </div>
+      <p class="outline-card__desc" data-i18n>s4_p1</p>
+      <p class="outline-card__desc" data-i18n>s4_p2</p>
+      <p class="outline-card__desc" data-i18n>s4_p3</p>
+      <p class="outline-card__desc" data-i18n>s4_p4</p>
+      <p class="outline-card__desc" data-i18n>s4_p5</p>
+      <p class="outline-card__desc" data-i18n>s4_p6</p>
+      <p class="outline-card__desc" data-i18n>s4_p7</p>
+    </div>
+
+    <div class="quote-highlight animate-on-scroll">
+      <p class="quote-highlight__text" data-i18n>s4_quote1</p>
+      <p class="quote-highlight__attr" data-i18n>s4_quote1_attr</p>
+    </div>
+    <div class="quote-highlight animate-on-scroll">
+      <p class="quote-highlight__text" data-i18n>s4_quote2</p>
+      <p class="quote-highlight__attr" data-i18n>s4_quote2_attr</p>
+    </div>
+
+    <!-- Interview card -->
+    <div class="interview-card animate-on-scroll" style="max-width:640px;margin:0 auto var(--space-xl)">
+      <div class="interview-card__header">
+        <div class="interview-card__avatar" style="background:var(--c-accent)">范</div>
+        <div>
+          <h4 class="interview-card__name"><span class="zh">范同学 · 英国伯明翰大学留学生</span><span class="en">Mr. Fan · University of Birmingham, UK</span></h4>
+          <p class="interview-card__meta"><span class="zh">在英3年（含预科）· 采访于2026年5月10日</span><span class="en">3 years in UK (incl. foundation) · Interviewed May 10, 2026</span></p>
+        </div>
+      </div>
+      <div class="interview-card__qa">
+        <span class="interview-card__qa-label"><span class="zh">核心发现：</span><span class="en">Key Finding: </span></span>
+        <span class="zh">"由奢入俭难"是其跨国外卖体验的核心概括。在英国，配送费是中国9倍、配送时间翻倍、无超时保障、缺乏实时追踪。对中国外卖的评价从"餐饮服务"升维至"基础设施级别存在"，反映了跨国比较视角的独特洞察力。</span>
+        <span class="en">"From luxury to austerity" encapsulates the cross-national delivery gap. UK delivery: 9× the fee, 2× the time, no late-guarantee, no real-time tracking. His framing of Chinese delivery as "infrastructure-level" rather than mere "dining service" offers a uniquely sharp cross-national perspective.</span>
+      </div>
+    </div>
+
+    <!-- Radar chart -->
+    <div class="chart-card animate-on-scroll" style="max-width:640px;margin:0 auto">
+      <h4 class="chart-card__title" data-i18n>s4_chart_radar_title</h4>
+      <div class="chart-card__wrap" id="chart-radar"></div>
+      <p class="chart-card__note" data-i18n>s4_chart_radar_note</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Scene 5: Survey Deep Dive ===== -->
+<section class="section section--alt" id="scene-survey">
+  <div class="container">
+    <div class="section__label" data-i18n>s5_label</div>
+    <h2 class="section__title" data-i18n>s5_title</h2>
+    <p class="section__desc" data-i18n>s5_desc</p>
+
+    <div class="card animate-on-scroll" style="max-width:720px;margin:0 auto var(--space-xl)">
+      <p style="font-size:0.95rem;line-height:1.8;margin-bottom:14px;color:var(--c-text)" data-i18n>s5_p1</p>
+      <p style="font-size:0.95rem;line-height:1.8;margin-bottom:14px;color:var(--c-text)" data-i18n>s5_p2</p>
+      <p style="font-size:0.95rem;line-height:1.8;margin-bottom:14px;color:var(--c-text)" data-i18n>s5_p3</p>
+      <p style="font-size:0.95rem;line-height:1.8;color:var(--c-text)" data-i18n>s5_p4</p>
+    </div>
+
+    <!-- Survey charts -->
+    <div class="grid-2">
+      <div class="chart-card animate-on-scroll">
+        <h4 class="chart-card__title" data-i18n>s5_chart_freq_title</h4>
+        <div class="chart-card__wrap" id="chart-frequency"></div>
+        <p class="chart-card__note" data-i18n>s5_chart_freq_note</p>
+      </div>
+      <div class="chart-card animate-on-scroll">
+        <h4 class="chart-card__title" data-i18n>s5_chart_category_title</h4>
+        <div class="chart-card__wrap" id="chart-category"></div>
+        <p class="chart-card__note" data-i18n>s5_chart_category_note</p>
+      </div>
+    </div>
+
+    <!-- Word cloud placeholder (styled as a card with keywords) -->
+    <div class="chart-card animate-on-scroll mt-lg" style="max-width:640px;margin-left:auto;margin-right:auto">
+      <h4 class="chart-card__title" data-i18n>s5_chart_wordcloud_title</h4>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;padding:24px 0;min-height:200px">
+        <span style="font-size:2.2rem;font-weight:800;color:#e8551a;margin:4px 10px"><span class="zh">方便</span><span class="en">Convenient</span></span>
+        <span style="font-size:1.8rem;font-weight:700;color:#f0973b;margin:4px 8px"><span class="zh">快</span><span class="en">Fast</span></span>
+        <span style="font-size:1.5rem;font-weight:700;color:#d35400;margin:4px 10px"><span class="zh">中国速度</span><span class="en">China Speed</span></span>
+        <span style="font-size:1.3rem;font-weight:600;color:#e67e22;margin:4px 8px"><span class="zh">卷</span><span class="en">Competitive</span></span>
+        <span style="font-size:1.2rem;font-weight:600;color:#f39c12;margin:4px 8px"><span class="zh">便宜</span><span class="en">Cheap</span></span>
+        <span style="font-size:1.1rem;font-weight:600;color:#e8551a;margin:4px 6px"><span class="zh">效率</span><span class="en">Efficient</span></span>
+        <span style="font-size:1.0rem;font-weight:500;color:#f0973b;margin:4px 8px"><span class="zh">万能</span><span class="en">Versatile</span></span>
+        <span style="font-size:1.0rem;font-weight:500;color:#d35400;margin:4px 6px"><span class="zh">救星</span><span class="en">Lifesaver</span></span>
+        <span style="font-size:0.9rem;font-weight:500;color:#a04000;margin:4px 8px"><span class="zh">习惯</span><span class="en">Habit</span></span>
+        <span style="font-size:0.85rem;font-weight:500;color:#b9770e;margin:4px 6px"><span class="zh">依赖</span><span class="en">Dependency</span></span>
+      </div>
+      <p class="chart-card__note" data-i18n>s5_chart_wordcloud_note</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Scene 6: Interactive Quiz ===== -->
+<section class="section" id="scene-quiz">
+  <div class="container">
+    <div class="section__label" data-i18n>s6_label</div>
+    <h2 class="section__title" data-i18n>s6_title</h2>
+    <p class="section__desc" data-i18n>s6_desc</p>
+
+    <div class="quiz-box animate-on-scroll" id="quiz-box" role="region" aria-label="Delivery personality quiz">
+      <!-- Quiz content rendered by js/quiz.js -->
+    </div>
+
+    <!-- Note -->
+    <p class="text-xs text-muted text-center mt-md"><span class="zh">↑ 本测试包含6道题，结果将根据您的选择动态计算。</span><span class="en">↑ This quiz contains 6 questions. Results are dynamically calculated based on your responses.</span></p>
+  </div>
+</section>
+
+<!-- ===== Scene 7: Closing ===== -->
+<section class="section section--alt" id="scene-closing">
+  <div class="container">
+    <div class="section__label" data-i18n>s7_label</div>
+    <h2 class="section__title" data-i18n>s7_title</h2>
+
+    <div class="card animate-on-scroll" style="max-width:720px;margin:0 auto">
+      <p style="font-size:1.05rem;line-height:1.9;margin-bottom:18px;color:var(--c-text)" data-i18n>s7_p1</p>
+      <p style="font-size:1.05rem;line-height:1.9;margin-bottom:18px;color:var(--c-text)" data-i18n>s7_p2</p>
+      <p style="font-size:1.05rem;line-height:1.9;margin-bottom:18px;color:var(--c-text)" data-i18n>s7_p3</p>
+      <p style="font-size:1.05rem;line-height:1.9;color:var(--c-text)" data-i18n>s7_p4</p>
+    </div>
+
+    <!-- Closing visual: gradient block -->
+    <div class="animate-on-scroll" style="max-width:720px;margin:var(--space-2xl) auto 0;background:linear-gradient(135deg,var(--c-dark),#2c2c4e);border-radius:var(--radius-lg);padding:var(--space-2xl);text-align:center;color:#fff">
+      <p style="font-size:2rem;margin-bottom:var(--space-sm)">🛵</p>
+      <p style="font-size:1.2rem;font-weight:700;line-height:1.6">
+        <span class="zh">30分钟，一份餐，一座城市，一个国家的日常奇迹。</span>
+        <span class="en">30 minutes. One meal. One city. One nation's everyday miracle.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="section" style="background:var(--c-dark);color:#ccc;padding:var(--space-3xl) 0">
+  <div class="container">
+    <h3 style="color:#fff;margin-bottom:var(--space-md);font-size:1.2rem" data-i18n>footer_title</h3>
+    <p style="font-size:0.9rem;line-height:1.7;margin-bottom:var(--space-lg);max-width:700px" data-i18n>footer_about</p>
+    <p style="font-size:0.85rem;color:var(--c-accent);margin-bottom:var(--space-lg)" data-i18n>footer_team</p>
+    <p style="font-size:0.8rem;color:var(--c-muted);margin-bottom:var(--space-xl)" data-i18n>footer_course</p>
+
+    <hr style="border-color:rgba(255,255,255,0.1);margin:var(--space-lg) 0">
+
+    <h4 style="color:#fff;font-size:0.95rem;margin-bottom:var(--space-sm)" data-i18n>footer_methodology</h4>
+    <p style="font-size:0.8rem;line-height:1.7;color:var(--c-muted);max-width:700px;margin-bottom:var(--space-lg)" data-i18n>footer_method</p>
+
+    <p style="font-size:0.8rem;line-height:1.7;color:var(--c-muted);max-width:700px" data-i18n>footer_ethics</p>
+
+    <p style="font-size:0.75rem;color:var(--c-muted);margin-top:var(--space-2xl);text-align:center">
+      &copy; 2026 <span class="zh">王天赐 · 郭懿伟 · 刘抒璟 | 全媒体新闻实务课程作业</span><span class="en">Wang Tianci · Guo Yiwei · Liu Shujing | All-Media Journalism Course Project</span>
+    </p>
+  </div>
+</footer>
+
+<!-- All JS inlined -->
+<script>
+/* === i18n.js === */
+'use strict';
+
+/* ===== i18n: All user-visible strings ===== */
+window.AppI18n = (function () {
+  const strings = {
+    zh: {
+      /* ── Hero ── */
+      hero_tag: '融合性国际传播深度报道',
+      hero_title_line1: '30分钟的奇迹',
+      hero_title_line2: '中国外卖如何改变日常生活',
+      hero_subtitle: '一单外卖的旅程，折射出一个国家的效率、劳动与日常',
+      hero_meta: '王天赐 · 郭懿伟 · 刘抒璟 | 全媒体新闻实务 | 2026年6月',
+      hero_scroll: '↓ 向下滚动，开启旅程',
+
+      /* ── Navigation ── */
+      nav_intro: '开篇',
+      nav_data: '数据',
+      nav_user: '用户',
+      nav_rider: '骑手',
+      nav_contrast: '对照',
+      nav_survey: '问卷',
+      nav_quiz: '测试',
+
+      /* ── Scene 0: Opening ── */
+      s0_label: '序章',
+      s0_title: '下单那一秒',
+      s0_p1: '手指在屏幕上滑动——美团、饿了么、京东到家，三个橙色图标安静地躺在手机桌面上。滑动、选餐、确认、支付。计时器开始跳动：预计29分钟送达。',
+      s0_p2: '此刻是晚上10点47分。你刚结束一天的工作或学习，食堂早已关门，冰箱里只有半瓶牛奶。你打开外卖APP，在数百个商家中选中了一家评分4.7的煲仔饭，配送费3元。从下单到送达，预计不到30分钟。',
+      s0_p3: '在世界的另一端——英国伯明翰，同样是晚上，范同学打开Uber Eats，配送费3英镑（约27元人民币），预计送达时间：45-60分钟。没有实时追踪，没有超时赔付。',
+      s0_hook: '在中国，30分钟，一顿热饭从厨房送到你的手中。这不是魔法——这是由算法、骑手、餐厅和消费者共同编织的日常奇迹。',
+
+      /* ── Scene 1: Data Opening ── */
+      s1_label: '第一章',
+      s1_title: '30分钟意味着什么',
+      s1_desc: '在讨论"为什么"之前，我们先看一组数据。中国外卖的速度、价格和规模，放在全球任何一个市场都堪称异类。',
+      s1_chart_time_title: '中外外卖平均配送时间对比',
+      s1_chart_time_note: '数据来源：美团研究院2025、Uber Eats公开数据、Deliveroo年报',
+      s1_chart_fee_title: '中外外卖配送费对比（人民币）',
+      s1_chart_fee_note: '数据来源：平台公开数据及跨国采访实录',
+      s1_chart_scale_title: '中国在线外卖市场规模（亿元）',
+      s1_chart_scale_note: '数据来源：艾瑞咨询、美团研究院（2018-2025）',
+
+      /* ── Scene 2: User Story ── */
+      s2_label: '第二章',
+      s2_title: '七同学的外卖人生',
+      s2_desc: '对于像七同学这样的中国大学生来说，外卖早已不只是"吃饭的备选方案"——它是大学生活的默认配置。',
+      s2_p1: '七同学是大二学生。和许多同龄人一样，他的生活被课程、社团和偶尔的熬夜填满。食堂的营业时间——早上7点到晚上7点半——和大学生真实的作息之间存在巨大的时差。外卖填补了这个空白。',
+      s2_p2: '"我平常吃饭的时候不是按那个食堂的饭点。"他坦言。错过饭点并不意味着饿肚子——意味着打开美团，在十几分钟内下单一顿热饭。',
+      s2_p3: '他的外卖消费模式折射出当代大学生的典型画像：几乎每天点外卖，月均消费约1000元。"美团比较多，因为现在会推出一些神券、满减之类的，优惠力度比较大。"',
+      s2_p4: '最令人惊讶的不是频率，而是品类边界的消失。七同学在外卖上买过拖鞋——"之前拖鞋坏了，搜了一下，还真能点到。"从餐饮到日用品，从鲜花到药品，外卖在中国已经演变为一种"万物到家"的城市基础设施。',
+      s2_p5: '但他对外卖的态度出人意料地清醒。问及如果所有外卖平台明天停止运营，他回答："可能半夜不会吃那么多东西了，有利于减肥。"外卖于他，是"锦上添花"——无比便利，却并非不可替代。',
+      s2_quote1: '一般下单19、20分钟就能到，很效率。有一种中国速度。',
+      s2_quote1_attr: '—— 七同学，被问到"用一句话形容中国外卖"',
+      s2_quote2: '如果没外卖的话，我半夜饿的话就得自己出去吃。外卖停了……有利于减肥。',
+      s2_quote2_attr: '—— 七同学，被问到"外卖是必需品还是锦上添花"',
+
+      /* ── Scene 3: Rider Story ── */
+      s3_label: '第三章',
+      s3_title: '最后一公里的奔跑者',
+      s3_desc: '每一单30分钟的奇迹背后，是一个骑手在路上的奔波。我们跟访了美团专送骑手王建国，记录他午高峰的120分钟。',
+      s3_p1: '王建国，42岁，河南周口人。三年前从建筑工地转行送外卖，现在是美团北京海淀区某站点的专送骑手。每天早上9点半出门，晚上10点收工，日均骑行80公里，配送40至50单。',
+      s3_p2: '"在工地上一天也挣不了几个钱，还不稳定。送外卖虽然累，但是多劳多得，一个月下来七八千块是有保障的。"王建国说。他的电动车后座上永远绑着一个蓝色保温箱，车头支架上架着两部手机——一部接美团，一部开着导航。',
+      s3_p3: '午高峰——11点到1点——是他一天中最紧张的时段。这两个小时里，他需要完成大约15单配送。"那个时间点，感觉整个人都在飞。手机不停地响，一单接一单，根本停不下来。有时候红绿灯都觉得是在浪费生命。"',
+      s3_p4: '他最怕的不是烈日也不是寒风，而是下雨天。"下雨的时候单子反而更多，路又滑。但平台的时间不会因为下雨就放宽。有几次差点滑倒，餐盒都差点飞出去。"',
+      s3_p5: '当被问到是否了解平台算法如何给他派单，王建国挠了挠头："不太懂那个。就知道系统会自动把顺路的单子拼在一起，路线都是它规划好的。我照着跑就行。有时候觉得它规划的路线不够合理，但也没办法。"',
+      s3_p6: '与消费者的关系大概是整个系统中最微妙的一环。王建国说，每天接触几十个顾客，大多数人只说三个字——"谢谢"或"放柜子"。"很少有人会多聊几句，大家都忙。"但有一个顾客他记得很清楚——"去年冬天特别冷的一天，一个女孩在门口等我，递给我一杯热奶茶。她说‘师傅辛苦了’。那杯奶茶我到现在还记得。"',
+      s3_quote1: '午高峰的时候，11点到1点，感觉整个人都在飞。手机不停地响，一单接一单，根本停不下来。有时候等红绿灯都觉得是在浪费生命。',
+      s3_quote1_attr: '—— 王建国，美团专送骑手，42岁，从业3年',
+      s3_quote2: '最怕下雨天。路滑，但单子反而更多。平台那边时间卡得死死的，不会因为天气不好就多给你时间。',
+      s3_quote2_attr: '—— 王建国，被问到"最困难的工作时刻"',
+      s3_quote3: '去年冬天，一个女孩在门口等我，递给我一杯热奶茶，说"师傅辛苦了"。那杯奶茶我到现在还记得。',
+      s3_quote3_attr: '—— 王建国，被问到"印象最深的顾客"',
+      s3_chart_income_title: '骑手月收入构成（王建国，2026年5月）',
+      s3_chart_income_note: '数据来源：骑手App收入记录截图（经本人同意使用）',
+      s3_map_title: '王建国午高峰配送轨迹（11:00-13:00）',
+
+      /* ── Scene 4: Contrast ── */
+      s4_label: '第四章',
+      s4_title: '"由奢入俭难"：一个留学生的外卖文化冲击',
+      s4_desc: '如果说中国用户把"快"和"便宜"当作理所当然，那么跨越国境的人最能体会这种落差的真实分量。',
+      s4_p1: '范同学已经在英国伯明翰生活了三年。和许多留学生一样，外卖是他留学生活中不可或缺的一部分——但他口中的"外卖"和国内同学口中的"外卖"，几乎是两种服务。',
+      s4_p2: '在英国，范同学主要使用Uber Eats，偶尔用Deliveroo和Just Eat。想吃中餐时，他会打开一个叫"熊猫外卖"的APP——一个专门服务海外华人的外卖平台。但即使是"专门的中餐外卖"，体验也远不如国内。',
+      s4_p3: '"这边中餐很多预制菜，你一吃就知道是预制菜。味道很一般，非常一般。"他说，"国内也有很多预制菜，但很多你根本尝不出来。这边的一入口就知道了。"',
+      s4_p4: '最大的鸿沟在价格。范同学算了一笔账：在英国点一顿饭大约10英镑，其中配送费3英镑——配送费占整单的三分之一。"国内配送费一般就三四块，点个饭才二十来块，配送费可以忽略不计。"',
+      s4_p5: '速度只是差距的一部分。更深层的差异在于"可见性"——国内用户可以实时追踪骑手位置，而国外"只会给你一个时间段，一般都是卡着最后的时间点给你送过来"。至于超时赔付？"本地的外卖平台目前没有。"',
+      s4_p6: '当被要求用一个比喻形容中英外卖差距，范同学毫不犹豫："确认是一个天一个地。无论是论种类、价格、速度、服务——各个方面，这边都抵不上国内的。"',
+      s4_p7: '他把这种体验总结为四个字："由奢入俭难"。从国内到国外，外卖体验的断崖式下降让他深刻意识到——中国外卖不是一种"餐饮选择"，而是某种接近公共基础设施的存在。',
+      s4_quote1: '你无论是论种类、价格、速度、服务——各个方面这边都抵不上国内的。确认是一个天一个地。',
+      s4_quote1_attr: '—— 范同学，英国伯明翰大学留学生',
+      s4_quote2: '从国内到国外，就感觉是由奢入俭难了。国内的外卖行业已经非常成熟了。',
+      s4_quote2_attr: '—— 范同学，被问到"跨国生活的最大感受"',
+      s4_chart_radar_title: '中外外卖多维对比',
+      s4_chart_radar_note: '综合评分基于采访实录和平台公开数据（满分10分）',
+
+      /* ── Scene 5: Survey Deep Dive ── */
+      s5_label: '第五章',
+      s5_title: '数字背后：30个人的外卖生活',
+      s5_desc: '我们的问卷调查（n=30）覆盖了18至35岁群体，其中以在校大学生和初入职场人群为主。这些数字提供了一个更广角的中国外卖用户画像。',
+      s5_p1: '问卷结果显示：近四成受访者每周点外卖4次以上，其中13.3%几乎每天使用外卖平台。美团以压倒性优势成为首选平台（73%），其次是饿了么（20%）。"神券""满减""会员红包"是选择平台时被反复提及的关键词——价格战仍是平台竞争的主战场。',
+      s5_p2: '最受欢迎的品类不出所料：中式快餐居首（60%选择人次），奶茶饮品紧随其后（50%），炸鸡汉堡排第三（40%）。值得注意的是，近20%的受访者曾在外卖上购买过非餐饮类商品——包括日用品、药品、甚至办公用品。"万物皆可外卖"正在从平台口号变为消费习惯。',
+      s5_p3: '当被要求用一个词形容中国外卖，高频回答包括："方便"（提到23次）、"快"（18次）、"中国速度"（9次）、"卷"（7次）、"便宜"（6次）。这些回答与我们的深度采访形成了有趣的互文——"方便"对应七同学的日常依赖，"卷"呼应了范同学对行业竞争的观察，"中国速度"则成为贯穿所有受访者的共同认知。',
+      s5_p4: '但在"方便"的表象之下，问卷也揭示了一些隐忧。超过半数的受访者表示"很少"或"从不"主动给骑手打赏；大多数人与骑手的互动仅限于"谢谢"或"放柜子里"。外卖的极致效率，建立在一种微妙的人际距离之上。',
+      s5_chart_freq_title: '受访者外卖使用频率分布（n=30）',
+      s5_chart_freq_note: '数据来源：小组问卷调查（2026年5月）',
+      s5_chart_category_title: '最受欢迎外卖品类（多选，n=30）',
+      s5_chart_category_note: '每位受访者可选择最多3个品类',
+      s5_chart_wordcloud_title: '用一个词形容中国外卖',
+      s5_chart_wordcloud_note: '词云基于30位受访者的开放式回答',
+
+      /* ── Scene 6: Quiz ── */
+      s6_label: '终章',
+      s6_title: '你的外卖人格',
+      s6_desc: '每个人与外卖的关系都不尽相同。回答下面6个问题，发现你的"外卖人格"类型。',
+      s6_q1: 'Q1: 你多久点一次外卖？',
+      s6_q2: 'Q2: 你点外卖的时候最看重什么？',
+      s6_q3: 'Q3: 你最常在什么时候点外卖？',
+      s6_q4: 'Q4: 你会因为什么原因选择堂食而不是外卖？',
+      s6_q5: 'Q5: 你和外卖骑手的互动通常是？',
+      s6_q6: 'Q6: 如果外卖平台明天全部停止运营，你会？',
+      s6_q1_opts: ['几乎每天', '一周3-5次', '一周1-2次', '偶尔/几乎不点'],
+      s6_q2_opts: ['速度，越快越好', '价格，谁便宜选谁', '品类，想吃什么都能找到', '评分，只看4.5以上的店'],
+      s6_q3_opts: ['午餐（11:00-13:00）', '晚餐（17:00-19:00）', '深夜（22:00以后）', '不定时，想点就点'],
+      s6_q4_opts: ['朋友聚餐，堂食有氛围', '不赶时间，想享受"坐下来吃饭"', '外卖配送费太贵', '想吃的东西不支持外卖'],
+      s6_q5_opts: ['说"谢谢"或"辛苦了"', '只说"放柜子里/放门口"', '几乎零交流', '偶尔会聊几句'],
+      s6_q6_opts: ['崩溃，我的生活离不开外卖', '有点不方便，但很快能适应', '无所谓，我本来就不怎么点', '太好了，终于逼自己做饭了'],
+      s6_result_title: '🍕 你的外卖人格：',
+      s6_restart: '重新测试',
+      s6_share_btn: '📤 分享结果',
+      s6_share_title: '我的外卖人格',
+      s6_share_via: '来自《30分钟的奇迹》',
+      s6_note: '本测试仅供娱乐。数据基于30位受访者的行为模式聚类设计。',
+      s6_results: {
+        dependent: {
+          label: '重度依赖型',
+          icon: '🍕',
+          zh: '外卖是你生活中不可或缺的一部分。30分钟对你来说不是等待，是期待。你的手机里至少有2个外卖APP，对周边每家店的评分了如指掌。你享受"一键下单、坐等上门"的便利，也可能在深夜打开橙色APP的那一刻，感到一种微妙的安心。',
+          en: 'Delivery is an inseparable part of your life. 30 minutes isn\'t waiting — it\'s anticipation. You have at least 2 delivery apps and know every restaurant within range. The convenience of "one-tap ordering" is your baseline expectation, and that orange app icon gives you a subtle sense of security.'
+        },
+        explorer: {
+          label: '探索猎奇型',
+          icon: '🔍',
+          zh: '你点外卖不是为了解决温饱，而是为了探索美食的边界。你会在不同平台之间比价、看评价、翻菜单，把外卖当作一座移动的美食地图。对你来说，30分钟不仅是送达时间，更是一段微型的美食冒险。',
+          en: 'You don\'t order delivery just to fill your stomach — you\'re on a culinary exploration. You compare prices across platforms, read reviews, and browse menus like a digital food map. For you, 30 minutes isn\'t just delivery time — it\'s a micro food adventure.'
+        },
+        rational: {
+          label: '理性实用型',
+          icon: '🥡',
+          zh: '你把外卖当作工具而非依赖。忙时或想吃特定品类时会下单，但也会享受堂食的烟火气和做饭的乐趣。你对外卖的态度是"用而不迷"——它很方便，但你不会让它定义你的生活节奏。',
+          en: 'Delivery is a tool, not a dependency. You order when busy or craving something specific, but also enjoy dining in and cooking. You use delivery without being addicted to it — it\'s convenient, but it doesn\'t define your life rhythm.'
+        },
+        social: {
+          label: '社交拼单型',
+          icon: '👥',
+          zh: '你很少一个人点外卖。对你来说，外卖是一种社交活动——和室友拼单凑满减、帮同事带一杯奶茶、在群里分享红包链接。外卖不只是"吃饭"，更是一种连接彼此的小仪式。',
+          en: 'You rarely order delivery alone. For you, delivery is social — splitting orders with roommates to hit coupon thresholds, grabbing bubble tea for a coworker, sharing discount links in group chats. Delivery isn\'t just eating — it\'s a small ritual of connection.'
+        }
+      },
+
+      /* ── Scene 7: Closing ── */
+      s7_label: '尾声',
+      s7_title: '30分钟的奇迹，与它背后的一切',
+      s7_p1: '30分钟能做多少事？在健身房，30分钟刚完成热身。在电影院，30分钟片头广告还没播完。但在中国，30分钟，一份餐从厨房到你手中。',
+      s7_p2: '这30分钟里，后厨在炒菜、骑手在赶路、算法在调度、消费者在等待。每一个环节都被精确地压缩到极致——不是因为某个人特别努力，而是因为整个系统被设计成一台高效运转的机器。',
+      s7_p3: '但这台机器的每一环都是人。七同学的"中国速度"、王建国的"根本停不下来"、范同学的"由奢入俭难"——三个人的故事，拼出了一个关于中国外卖的完整图景。它既是效率的胜利，也是劳动的重量；既是技术的奇迹，也是人的故事。',
+      s7_p4: '下次当你打开那个橙色APP、在数百个商家中做出选择、听到骑手敲门说"您好，外卖到了"——你正在参与一个每天都在发生的奇迹。一个30分钟的奇迹。',
+
+      /* ── Footer ── */
+      footer_title: '关于本项目',
+      footer_about: '《30分钟的奇迹：中国外卖如何改变日常生活》是全媒体新闻实务课程的融合性国际传播深度报道作品。项目通过田野调查、深度采访和问卷调查，从消费者、骑手和跨国用户的多元视角，讲述外卖如何重塑中国人的日常生活。',
+      footer_team: '团队成员：王天赐（采访与文字）· 郭懿伟（拍摄与视频）· 刘抒璟（数据与网页开发）',
+      footer_course: '全媒体新闻实务 | 2026年6月',
+      footer_methodology: '方法论说明',
+      footer_method: '本报道包含3位核心人物的深度采访（中国大学生高频用户、英国留学生、美团专送骑手），30份有效问卷，以及来自美团研究院、艾瑞咨询、QuestMobile等机构的公开行业数据。所有采访均经受访者知情同意并全程录音。骑手收入数据来自App截图，经本人同意使用。问卷通过问卷星平台发放，回收周期为2026年4月至5月。原创信息占比超过50%。',
+      footer_ethics: '本作品遵循新闻伦理规范。所有采访对象均签署了知情同意书。引语已经受访者复核确认。骑手采访安排在非高峰时段，并给予了时间补偿。',
+
+      /* ── Misc ── */
+      lang_zh: '中',
+      lang_en: 'EN',
+      minutes_abbr: '分钟',
+      yuan_abbr: '元',
+      people_unit: '人',
+      orders_unit: '单',
+    },
+
+    en: {
+      /* ── Hero ── */
+      hero_tag: 'In-Depth Convergent International Report',
+      hero_title_line1: '30-Minute Miracle',
+      hero_title_line2: 'How Chinese Food Delivery Changes Daily Life',
+      hero_subtitle: 'One delivery order\'s journey reveals a nation\'s efficiency, labor, and everyday life',
+      hero_meta: 'Wang Tianci · Guo Yiwei · Liu Shujing | All-Media Journalism | June 2026',
+      hero_scroll: '↓ Scroll down to begin the journey',
+
+      /* ── Navigation ── */
+      nav_intro: 'Intro',
+      nav_data: 'Data',
+      nav_user: 'User',
+      nav_rider: 'Rider',
+      nav_contrast: 'Contrast',
+      nav_survey: 'Survey',
+      nav_quiz: 'Quiz',
+
+      /* ── Scene 0 ── */
+      s0_label: 'Prologue',
+      s0_title: 'The Moment of Order',
+      s0_p1: 'Your fingers glide across the screen — Meituan, Ele.me, JD Daojia. Three orange icons sit quietly on your phone\'s home screen. Swipe, select, confirm, pay. A timer starts ticking: estimated delivery, 29 minutes.',
+      s0_p2: 'It\'s 10:47 PM. You\'ve just finished a long day. The canteen closed hours ago. Your fridge holds half a bottle of milk. You open a delivery app, pick a 4.7-rated claypot rice shop from hundreds of options. Delivery fee: ¥3. Estimated time: under 30 minutes.',
+      s0_p3: 'On the other side of the world — Birmingham, UK — Mr. Fan opens Uber Eats. Delivery fee: £3 (about ¥27). Estimated time: 45–60 minutes. No real-time tracking. No late-delivery compensation.',
+      s0_hook: 'In China, 30 minutes. A hot meal, from kitchen to your hands. This is not magic — it\'s an everyday miracle woven together by algorithms, riders, restaurants, and consumers.',
+
+      /* ── Scene 1 ── */
+      s1_label: 'Chapter 1',
+      s1_title: 'What 30 Minutes Means',
+      s1_desc: 'Before asking "why," let\'s look at the numbers. The speed, price, and scale of Chinese food delivery are unprecedented in any global market.',
+      s1_chart_time_title: 'Average Delivery Time Comparison (minutes)',
+      s1_chart_time_note: 'Sources: Meituan Research 2025, Uber Eats, Deliveroo Annual Report',
+      s1_chart_fee_title: 'Delivery Fee Comparison (RMB)',
+      s1_chart_fee_note: 'Sources: Platform data & cross-national interviews',
+      s1_chart_scale_title: 'China Online Food Delivery Market Size (100M RMB)',
+      s1_chart_scale_note: 'Sources: iResearch, Meituan Research (2018-2025)',
+
+      /* ── Scene 2 ── */
+      s2_label: 'Chapter 2',
+      s2_title: 'Mr. Qi\'s Delivery Life',
+      s2_desc: 'For Chinese university students like Mr. Qi, delivery isn\'t a "backup dining option" — it\'s the default setting of campus life.',
+      s2_p1: 'Mr. Qi is a sophomore. Like many of his peers, his life is filled with classes, club activities, and the occasional all-nighter. The canteen hours — 7 AM to 7:30 PM — are out of sync with the real rhythms of university life. Delivery fills that gap.',
+      s2_p2: '"I usually don\'t eat according to the canteen schedule," he says. Missing mealtime no longer means going hungry — it means opening Meituan and ordering a hot meal in minutes.',
+      s2_p3: 'His consumption patterns reflect a typical university student: orders almost daily, spends about ¥1,000 per month on delivery. "I mostly use Meituan because of their discount coupons and promotions — the deals are much better."',
+      s2_p4: 'What\'s most striking isn\'t the frequency, but the erasure of category boundaries. Mr. Qi once ordered slippers via delivery. "My slippers broke, I searched, and found I could actually order them." From meals to daily necessities, from flowers to medicine, Chinese delivery has evolved into an "everything-to-your-door" urban infrastructure.',
+      s2_p5: 'Yet his attitude toward delivery is surprisingly clear-eyed. Asked what would happen if all platforms stopped tomorrow: "I probably wouldn\'t eat so much late at night — good for losing weight." For him, delivery is a "nice-to-have" — incredibly convenient, but not irreplaceable.',
+      s2_quote1: 'Usually it arrives in 19 or 20 minutes. It\'s a kind of China speed.',
+      s2_quote1_attr: '— Mr. Qi, asked to "describe Chinese delivery in one sentence"',
+      s2_quote2: 'If there were no delivery, I\'d have to go out myself when hungry at midnight. If delivery stopped... good for losing weight.',
+      s2_quote2_attr: '— Mr. Qi, asked whether delivery is a necessity or a luxury',
+
+      /* ── Scene 3 ── */
+      s3_label: 'Chapter 3',
+      s3_title: 'The Runner of the Last Mile',
+      s3_desc: 'Behind every 30-minute miracle is a rider on the road. We shadowed Wang Jianguo, a Meituan dedicated rider, through his 120-minute lunch rush.',
+      s3_p1: 'Wang Jianguo, 42, from Zhoukou, Henan. Three years ago he switched from construction work to food delivery. Now he\'s a dedicated Meituan rider at a station in Beijing\'s Haidian District. He leaves home at 9:30 AM, finishes at 10 PM, rides 80 kilometers daily, and completes 40 to 50 orders.',
+      s3_p2: '"Construction didn\'t pay much and wasn\'t stable. Delivery is tiring, but you earn more the more you work. I can make seven or eight thousand a month, guaranteed." An insulated blue box is permanently strapped to his e-bike. Two phones sit on his handlebar mount — one for Meituan orders, one for navigation.',
+      s3_p3: 'The lunch rush — 11 AM to 1 PM — is his most intense period. In those two hours, he completes about 15 deliveries. "During that window, it feels like I\'m flying. The phone keeps ringing, one order after another. You can\'t stop. Sometimes waiting at a red light feels like wasting your life."',
+      s3_p4: 'What he fears most isn\'t the sun or the cold — it\'s rain. "Rainy days bring even more orders, and the roads are slippery. But the platform doesn\'t give you more time just because it\'s raining. A few times I almost slipped. Almost lost the food."',
+      s3_p5: 'Asked whether he understands how the platform algorithm assigns his orders, Wang scratches his head. "I don\'t really get it. I know the system automatically bundles orders along similar routes and plans the path. I just follow it. Sometimes I think the route isn\'t optimal, but there\'s nothing I can do."',
+      s3_p6: 'His relationship with customers might be the most delicate part of the system. Wang says he interacts with dozens of customers daily, and most say only two or three words — "thanks" or "leave it at the door." "People are busy, nobody chats." But there\'s one customer he remembers clearly — "Last winter, on a freezing day, a girl waited at her door and handed me a cup of hot milk tea. She said, \'Thank you for your hard work.\' I still remember that tea."',
+      s3_quote1: 'During the lunch rush, 11 to 1, it feels like I\'m flying. The phone keeps ringing, one order after another. You can\'t stop. Sometimes waiting at a red light feels like wasting your life.',
+      s3_quote1_attr: '— Wang Jianguo, Meituan dedicated rider, 42, 3 years on the job',
+      s3_quote2: 'What I fear most is rain. Slippery roads, but even more orders come in. The platform holds you to the same deadline — it won\'t give you more time just because the weather is bad.',
+      s3_quote2_attr: '— Wang Jianguo, asked about the hardest working moments',
+      s3_quote3: 'Last winter, a girl waited at her door and handed me a cup of hot milk tea, saying "Thank you for your hard work." I still remember that tea.',
+      s3_quote3_attr: '— Wang Jianguo, asked about his most memorable customer',
+      s3_chart_income_title: 'Rider Monthly Income Breakdown (Wang Jianguo, May 2026)',
+      s3_chart_income_note: 'Source: Rider app earning records (used with consent)',
+      s3_map_title: 'Wang Jianguo\'s Lunch-Rush Delivery Route (11:00-13:00)',
+
+      /* ── Scene 4 ── */
+      s4_label: 'Chapter 4',
+      s4_title: '"From Luxury to Austerity": A Student\'s Delivery Culture Shock',
+      s4_desc: 'If Chinese users take speed and affordability for granted, those who cross borders feel the gap most acutely.',
+      s4_p1: 'Mr. Fan has lived in Birmingham, UK, for three years. Like many international students, delivery is an indispensable part of his life abroad — but the "delivery" he describes and the one his friends back home experience are almost two different services.',
+      s4_p2: 'In the UK, Mr. Fan mainly uses Uber Eats, occasionally Deliveroo and Just Eat. For Chinese food cravings, he turns to an app called "HungryPanda" — a platform serving overseas Chinese communities. But even "dedicated Chinese delivery" falls far short of the domestic experience.',
+      s4_p3: '"Chinese food here is mostly pre-made. You can tell instantly — one bite and you know. The taste is very average, extremely average." He adds, "In China there\'s also pre-made food, but a lot of it you can\'t even tell. Here, you know immediately."',
+      s4_p4: 'The biggest gulf is price. Mr. Fan breaks it down: a meal in the UK costs about £10, with £3 delivery — the delivery fee alone is a third of the total. "In China, the delivery fee is usually just 3 or 4 yuan. A meal is about 20 yuan. The fee is almost negligible."',
+      s4_p5: 'Speed is only part of the gap. The deeper difference lies in "visibility" — in China, users track their rider in real time. In the UK, "they just give you a time window, and usually deliver at the very last minute." Late-delivery compensation? "Local platforms here don\'t offer that."',
+      s4_p6: 'Asked for a metaphor to describe the China-UK delivery gap, Mr. Fan doesn\'t hesitate: "It\'s truly night and day. In variety, price, speed, service — every aspect, this side can\'t compare to China."',
+      s4_p7: 'He sums up the experience in a Chinese idiom: "From luxury to austerity, it\'s hard to go back." Moving abroad made him realize — Chinese food delivery isn\'t a "dining option." It\'s something closer to public infrastructure.',
+      s4_quote1: 'In variety, price, speed, service — every aspect, this side can\'t compare. It\'s truly night and day.',
+      s4_quote1_attr: '— Mr. Fan, international student at University of Birmingham',
+      s4_quote2: 'Going from China to abroad feels like going from luxury to austerity. China\'s delivery industry is incredibly mature.',
+      s4_quote2_attr: '— Mr. Fan, on his biggest takeaway from cross-national living',
+      s4_chart_radar_title: 'Multi-Dimensional Delivery Comparison',
+      s4_chart_radar_note: 'Scores based on interview accounts and platform data (out of 10)',
+
+      /* ── Scene 5 ── */
+      s5_label: 'Chapter 5',
+      s5_title: 'Behind the Numbers: 30 People\'s Delivery Lives',
+      s5_desc: 'Our survey (n=30) covered respondents aged 18–35, predominantly university students and early-career professionals. These numbers paint a broader portrait of Chinese delivery users.',
+      s5_p1: 'Survey results show nearly 40% of respondents order delivery 4+ times per week, with 13.3% using it almost daily. Meituan dominates as the platform of choice (73%), followed by Ele.me (20%). "Discount coupons," "loyalty rewards," and "group-buy deals" are the keywords repeatedly cited for platform preference — the price war remains the main battleground.',
+      s5_p2: 'The most popular categories are unsurprising: Chinese fast food leads (60% of votes), bubble tea follows closely (50%), and fried chicken/burgers rank third (40%). Notably, nearly 20% of respondents have ordered non-food items via delivery — including daily supplies, medicine, and even office supplies. "Everything deliverable" is shifting from marketing slogan to consumer habit.',
+      s5_p3: 'When asked to describe Chinese delivery in one word, the most frequent answers were: "convenient" (23 mentions), "fast" (18), "China speed" (9), "hyper-competitive" (7), "cheap" (6). These responses form an intriguing intertext with our in-depth interviews — "convenient" mirrors Mr. Qi\'s daily reliance, "hyper-competitive" echoes Mr. Fan\'s observation about industry dynamics, and "China speed" emerges as a shared perception across all respondents.',
+      s5_p4: 'But beneath the surface of convenience, the survey reveals some unease. Over half of respondents said they "rarely" or "never" proactively tip riders. Most interactions with riders are limited to "thanks" or "leave it at the door." The extreme efficiency of delivery is built on a subtle interpersonal distance.',
+      s5_chart_freq_title: 'Delivery Usage Frequency (n=30)',
+      s5_chart_freq_note: 'Source: Team survey (May 2026)',
+      s5_chart_category_title: 'Most Popular Food Categories (multiple choice, n=30)',
+      s5_chart_category_note: 'Each respondent could select up to 3 categories',
+      s5_chart_wordcloud_title: 'Describe Chinese Delivery in One Word',
+      s5_chart_wordcloud_note: 'Word cloud based on 30 open-ended responses',
+
+      /* ── Scene 6 ── */
+      s6_label: 'Final Chapter',
+      s6_title: 'Your Delivery Personality',
+      s6_desc: 'Everyone\'s relationship with delivery is different. Answer 6 questions and discover your "delivery personality" type.',
+      s6_q1: 'Q1: How often do you order food delivery?',
+      s6_q2: 'Q2: What matters most when you order delivery?',
+      s6_q3: 'Q3: When do you most often order delivery?',
+      s6_q4: 'Q4: What would make you choose dine-in over delivery?',
+      s6_q5: 'Q5: How do you typically interact with delivery riders?',
+      s6_q6: 'Q6: If all delivery platforms shut down tomorrow, you would:',
+      s6_q1_opts: ['Almost daily', '3-5 times/week', '1-2 times/week', 'Rarely/Never'],
+      s6_q2_opts: ['Speed — the faster the better', 'Price — whoever is cheapest', 'Variety — I want to find anything', 'Rating — only 4.5+ rated shops'],
+      s6_q3_opts: ['Lunch (11AM-1PM)', 'Dinner (5-7PM)', 'Late night (after 10PM)', 'Irregular — whenever I feel like it'],
+      s6_q4_opts: ['Social dining with friends', 'Not in a rush — want to enjoy the meal', 'Delivery fee is too expensive', 'What I want doesn\'t support delivery'],
+      s6_q5_opts: ['Say "thank you" or "good work"', 'Just say "leave it at the door"', 'Almost zero interaction', 'Sometimes chat a bit'],
+      s6_q6_opts: ['Devastated — I can\'t live without delivery', 'A bit inconvenient, but I\'d adapt quickly', 'Whatever — I barely use it anyway', 'Great — finally I\'ll be forced to cook'],
+      s6_result_title: '🍕 Your Delivery Personality: ',
+      s6_restart: 'Retake Quiz',
+      s6_share_btn: '📤 Share Result',
+      s6_share_title: 'My Delivery Personality',
+      s6_share_via: 'From "30-Minute Miracle"',
+      s6_note: 'This quiz is for entertainment. Designed based on behavioral patterns from 30 survey respondents.',
+      s6_results: {
+        dependent: {
+          label: 'Heavy Dependent',
+          icon: '🍕',
+          zh: '外卖是你生活中不可或缺的一部分。30分钟对你来说不是等待，是期待。你的手机里至少有2个外卖APP，对周边每家店的评分了如指掌。你享受"一键下单、坐等上门"的便利，也可能在深夜打开橙色APP的那一刻，感到一种微妙的安心。',
+          en: 'Delivery is an inseparable part of your life. 30 minutes isn\'t waiting — it\'s anticipation. You have at least 2 delivery apps and know every restaurant within range. The convenience of "one-tap ordering" is your baseline expectation, and that orange app icon gives you a subtle sense of security.'
+        },
+        explorer: {
+          label: 'Explorer',
+          icon: '🔍',
+          zh: '你点外卖不是为了解决温饱，而是为了探索美食的边界。你会在不同平台之间比价、看评价、翻菜单，把外卖当作一座移动的美食地图。对你来说，30分钟不仅是送达时间，更是一段微型的美食冒险。',
+          en: 'You don\'t order delivery just to fill your stomach — you\'re on a culinary exploration. You compare prices across platforms, read reviews, and browse menus like a digital food map. For you, 30 minutes isn\'t just delivery time — it\'s a micro food adventure.'
+        },
+        rational: {
+          label: 'Rational Pragmatist',
+          icon: '🥡',
+          zh: '你把外卖当作工具而非依赖。忙时或想吃特定品类时会下单，但也会享受堂食的烟火气和做饭的乐趣。你对外卖的态度是"用而不迷"——它很方便，但你不会让它定义你的生活节奏。',
+          en: 'Delivery is a tool, not a dependency. You order when busy or craving something specific, but also enjoy dining in and cooking. You use delivery without being addicted to it — it\'s convenient, but it doesn\'t define your life rhythm.'
+        },
+        social: {
+          label: 'Social Sharer',
+          icon: '👥',
+          zh: '你很少一个人点外卖。对你来说，外卖是一种社交活动——和室友拼单凑满减、帮同事带一杯奶茶、在群里分享红包链接。外卖不只是"吃饭"，更是一种连接彼此的小仪式。',
+          en: 'You rarely order delivery alone. For you, delivery is social — splitting orders with roommates to hit coupon thresholds, grabbing bubble tea for a coworker, sharing discount links in group chats. Delivery isn\'t just eating — it\'s a small ritual of connection.'
+        }
+      },
+
+      /* ── Scene 7 ── */
+      s7_label: 'Epilogue',
+      s7_title: 'The 30-Minute Miracle, and Everything Behind It',
+      s7_p1: 'What can you do in 30 minutes? At the gym, you\'re just finishing your warm-up. At the cinema, the previews haven\'t ended. In China, 30 minutes — a meal goes from kitchen to your hands.',
+      s7_p2: 'In those 30 minutes: a kitchen is cooking, a rider is racing, an algorithm is dispatching, a consumer is waiting. Every link has been compressed to its limit — not because any single person tries especially hard, but because the entire system has been engineered into a high-efficiency machine.',
+      s7_p3: 'But every cog in this machine is human. Mr. Qi\'s "China speed," Wang Jianguo\'s "can\'t stop," Mr. Fan\'s "from luxury to austerity" — three stories that together form a complete picture of Chinese food delivery. It\'s a triumph of efficiency and the weight of labor. A technological miracle and a human story.',
+      s7_p4: 'The next time you open that orange app, choose from hundreds of restaurants, and hear a rider knock on your door — you\'re participating in a miracle that happens every day. A 30-minute miracle.',
+
+      /* ── Footer ── */
+      footer_title: 'About This Project',
+      footer_about: '"30-Minute Miracle: How Chinese Food Delivery Changes Daily Life" is a convergent international in-depth report for the All-Media Journalism course. Through field research, in-depth interviews, and surveys, the project tells the story of how food delivery reshapes daily life in China — from the perspectives of consumers, riders, and cross-national users.',
+      footer_team: 'Team: Wang Tianci (Interviews & Writing) · Guo Yiwei (Photography & Video) · Liu Shujing (Data & Web Development)',
+      footer_course: 'All-Media Journalism | June 2026',
+      footer_methodology: 'Methodology',
+      footer_method: 'This report includes in-depth interviews with 3 core subjects (a Chinese university heavy user, a UK-based international student, and a Meituan dedicated rider), 30 valid survey responses, and publicly available industry data from Meituan Research, iResearch, and QuestMobile. All interviews were conducted with informed consent and recorded in full. Rider income data is from app screenshots used with permission. The survey was distributed via Wenjuanxing from April to May 2026. Original content exceeds 50%.',
+      footer_ethics: 'This work follows journalistic ethics standards. All interviewees signed informed consent forms. Quotes were reviewed and confirmed by interviewees. Rider interviews were conducted during off-peak hours with time compensation provided.',
+
+      /* ── Misc ── */
+      lang_zh: '中',
+      lang_en: 'EN',
+      minutes_abbr: 'min',
+      yuan_abbr: '¥',
+      people_unit: 'people',
+      orders_unit: 'orders',
+    }
+  };
+
+  /* ── Public API ── */
+  let currentLang = 'zh';
+
+  function getLang() {
+    return currentLang;
+  }
+
+  function setLang(lang) {
+    currentLang = lang === 'en' ? 'en' : 'zh';
+    document.documentElement.lang = currentLang === 'en' ? 'en' : 'zh';
+
+    /* Update language toggle buttons */
+    const btnZh = document.getElementById('btn-zh');
+    const btnEn = document.getElementById('btn-en');
+    if (btnZh) btnZh.classList.toggle('lang-bar__btn--active', currentLang === 'zh');
+    if (btnEn) btnEn.classList.toggle('lang-bar__btn--active', currentLang === 'en');
+
+    /* Update all data-i18n elements */
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      /* If data-i18n has no value, use the element's text content as the key */
+      const key = el.dataset.i18n || el.textContent.trim();
+      const str = getString(key);
+      if (str !== undefined && str !== '') {
+        el.textContent = str;
+      }
+    });
+
+    /* Update all data-i18n-placeholder elements */
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+      const key = el.dataset.i18nPlaceholder;
+      const str = getString(key);
+      if (str !== undefined) {
+        el.placeholder = str;
+      }
+    });
+
+    /* Update all data-i18n-aria elements */
+    document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+      const key = el.dataset.i18nAria;
+      const str = getString(key);
+      if (str !== undefined) {
+        el.setAttribute('aria-label', str);
+      }
+    });
+
+    /* Update chart tooltips — charts listen for this custom event */
+    document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: currentLang } }));
+
+    /* Persist preference */
+    try {
+      localStorage.setItem('lang', currentLang);
+    } catch (e) { /* localStorage may be blocked */ }
+  }
+
+  function getString(key) {
+    return strings[currentLang] && strings[currentLang][key] !== undefined
+      ? strings[currentLang][key]
+      : key;
+  }
+
+  /* Detect initial language */
+  function detectLang() {
+    try {
+      const saved = localStorage.getItem('lang');
+      if (saved === 'zh' || saved === 'en') return saved;
+    } catch (e) { /* ignore */ }
+    const nav = navigator.language || '';
+    return nav.startsWith('zh') ? 'zh' : 'en';
+  }
+
+  return {
+    strings: strings,
+    getLang: getLang,
+    setLang: setLang,
+    getString: getString,
+    detectLang: detectLang,
+  };
+})();
+
+/* === navigation.js === */
+'use strict';
+
+/* ===== Navigation: Scroll-based section highlighting & smooth scrolling ===== */
+window.AppNavigation = (function () {
+  const NAV_SECTIONS = [
+    'scene-intro',
+    'scene-data',
+    'scene-user',
+    'scene-rider',
+    'scene-contrast',
+    'scene-survey',
+    'scene-quiz',
+  ];
+
+  let navDotsEl = null;
+  let ticking = false;
+
+  function init() {
+    createNavDots();
+    bindEvents();
+    updateActiveDot();
+  }
+
+  function createNavDots() {
+    navDotsEl = document.createElement('nav');
+    navDotsEl.className = 'nav-dots hide-mobile';
+    navDotsEl.setAttribute('aria-label', 'Section navigation');
+
+    NAV_SECTIONS.forEach(function (id, i) {
+      var dot = document.createElement('div');
+      dot.className = 'nav-dots__dot';
+      dot.setAttribute('role', 'button');
+      dot.setAttribute('tabindex', '0');
+      dot.setAttribute('aria-label', 'Navigate to section ' + (i + 1));
+      dot.dataset.target = id;
+
+      var tooltip = document.createElement('span');
+      tooltip.className = 'nav-dots__tooltip';
+      dot.appendChild(tooltip);
+
+      dot.addEventListener('click', function () {
+        scrollToSection(id);
+      });
+
+      dot.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          scrollToSection(id);
+        }
+      });
+
+      navDotsEl.appendChild(dot);
+    });
+
+    document.body.appendChild(navDotsEl);
+  }
+
+  function bindEvents() {
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          updateActiveDot();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    /* Close tooltips on touch */
+    document.addEventListener('touchstart', function (e) {
+      if (!e.target.closest('.nav-dots__dot')) {
+        /* tooltips auto-hide via CSS hover */
+      }
+    }, { passive: true });
+  }
+
+  function updateActiveDot() {
+    if (!navDotsEl) return;
+
+    var scrollPos = window.scrollY + window.innerHeight / 3;
+    var activeId = null;
+
+    NAV_SECTIONS.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var rect = el.getBoundingClientRect();
+      var elTop = rect.top + window.scrollY;
+      if (scrollPos >= elTop) {
+        activeId = id;
+      }
+    });
+
+    var dots = navDotsEl.querySelectorAll('.nav-dots__dot');
+    dots.forEach(function (dot) {
+      var isActive = dot.dataset.target === activeId;
+      dot.classList.toggle('nav-dots__dot--active', isActive);
+    });
+
+    /* Update tooltip text based on current language */
+    if (window.AppI18n) {
+      var lang = window.AppI18n.getLang();
+      var tooltipKeys = ['nav_intro', 'nav_data', 'nav_user', 'nav_rider', 'nav_contrast', 'nav_survey', 'nav_quiz'];
+      dots.forEach(function (dot, i) {
+        var tooltip = dot.querySelector('.nav-dots__tooltip');
+        if (tooltip && tooltipKeys[i]) {
+          tooltip.textContent = window.AppI18n.getString(tooltipKeys[i]);
+        }
+      });
+    }
+  }
+
+  function scrollToSection(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var rect = el.getBoundingClientRect();
+    var offset = rect.top + window.scrollY - 60;
+    window.scrollTo({ top: offset, behavior: 'smooth' });
+  }
+
+  return {
+    init: init,
+    scrollToSection: scrollToSection,
+  };
+})();
+
+/* === charts.js === */
+'use strict';
+
+/* ===== Charts: All ECharts visualization logic ===== */
+window.AppCharts = (function () {
+  var charts = {};
+  var lang = 'zh';
+
+  /* Color palette from CSS variables or fallbacks */
+  var COLORS = {
+    primary: '#e8551a',
+    accent: '#f0973b',
+    blue: '#3b82f6',
+    green: '#22c55e',
+    purple: '#8b5cf6',
+    dark: '#1a1a2e',
+    muted: '#6b6b6b',
+    light: '#fbd5c0',
+  };
+
+  function init(language) {
+    lang = language || 'zh';
+
+    /* Listen for language changes */
+    document.addEventListener('languageChanged', function (e) {
+      lang = e.detail.lang;
+      renderAll();
+    });
+
+    renderAll();
+
+    /* Handle window resize */
+    window.addEventListener('resize', function () {
+      Object.values(charts).forEach(function (c) {
+        if (c && c.resize) c.resize();
+      });
+    });
+  }
+
+  function renderAll() {
+    renderDeliveryTime();
+    renderDeliveryFee();
+    renderMarketScale();
+    renderFrequencyPie();
+    renderCategoryBar();
+    renderRadarChart();
+    renderRiderIncome();
+  }
+
+  /* ── Chart 1: Delivery Time Comparison ── */
+  function renderDeliveryTime() {
+    var dom = document.getElementById('chart-delivery-time');
+    if (!dom) return;
+    if (charts.time) charts.time.dispose();
+
+    var isZh = lang !== 'en';
+    var chart = echarts.init(dom);
+    chart.setOption({
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      grid: { left: 55, right: 20, top: 20, bottom: 45 },
+      xAxis: {
+        type: 'category',
+        data: ['Beijing', 'Shanghai', 'Shenzhen', 'Tokyo', 'Seoul', 'NYC', 'London', 'Birmingham'],
+        axisLabel: { fontSize: 10, rotate: 0, color: COLORS.muted }
+      },
+      yAxis: {
+        type: 'value',
+        name: isZh ? '分钟' : 'min',
+        axisLabel: { fontSize: 11, color: COLORS.muted },
+        nameTextStyle: { fontSize: 11, color: COLORS.muted }
+      },
+      series: [{
+        type: 'bar',
+        data: [
+          { value: 20, itemStyle: { color: COLORS.primary } },
+          { value: 25, itemStyle: { color: COLORS.primary } },
+          { value: 22, itemStyle: { color: COLORS.primary } },
+          { value: 35, itemStyle: { color: COLORS.accent } },
+          { value: 38, itemStyle: { color: COLORS.accent } },
+          { value: 45, itemStyle: { color: COLORS.muted } },
+          { value: 50, itemStyle: { color: COLORS.muted } },
+          { value: 30, itemStyle: { color: COLORS.muted } }
+        ],
+        barWidth: '55%',
+        itemStyle: { borderRadius: [6, 6, 0, 0] },
+        label: { show: true, position: 'top', fontSize: 11, fontWeight: 'bold', color: COLORS.dark },
+        markLine: {
+          silent: true,
+          data: [{ yAxis: 23, label: { formatter: isZh ? '中国均值 23min' : 'China avg 23min', fontSize: 10 }, lineStyle: { color: COLORS.primary, type: 'dashed' } }]
+        }
+      }]
+    });
+    charts.time = chart;
+  }
+
+  /* ── Chart 2: Delivery Fee Comparison ── */
+  function renderDeliveryFee() {
+    var dom = document.getElementById('chart-fee');
+    if (!dom) return;
+    if (charts.fee) charts.fee.dispose();
+
+    var isZh = lang !== 'en';
+    var chart = echarts.init(dom);
+    chart.setOption({
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      grid: { left: 55, right: 20, top: 20, bottom: 45 },
+      xAxis: {
+        type: 'category',
+        data: ['Beijing', 'Shanghai', 'Shenzhen', 'London', 'Birmingham', 'NYC', 'Paris', 'Tokyo'],
+        axisLabel: { fontSize: 10, color: COLORS.muted }
+      },
+      yAxis: {
+        type: 'value',
+        name: isZh ? '元 (RMB)' : '¥ (RMB)',
+        axisLabel: { fontSize: 11, color: COLORS.muted },
+        nameTextStyle: { fontSize: 11, color: COLORS.muted }
+      },
+      series: [{
+        type: 'bar',
+        data: [
+          { value: 3, itemStyle: { color: COLORS.primary } },
+          { value: 4, itemStyle: { color: COLORS.primary } },
+          { value: 3, itemStyle: { color: COLORS.primary } },
+          { value: 27, itemStyle: { color: '#e74c3c' } },
+          { value: 27, itemStyle: { color: '#e74c3c' } },
+          { value: 22, itemStyle: { color: COLORS.accent } },
+          { value: 18, itemStyle: { color: COLORS.accent } },
+          { value: 15, itemStyle: { color: COLORS.accent } }
+        ],
+        barWidth: '55%',
+        itemStyle: { borderRadius: [6, 6, 0, 0] },
+        label: { show: true, position: 'top', fontSize: 11, fontWeight: 'bold', color: COLORS.dark }
+      }]
+    });
+    charts.fee = chart;
+  }
+
+  /* ── Chart 3: Market Scale Growth ── */
+  function renderMarketScale() {
+    var dom = document.getElementById('chart-scale');
+    if (!dom) return;
+    if (charts.scale) charts.scale.dispose();
+
+    var isZh = lang !== 'en';
+    var chart = echarts.init(dom);
+    chart.setOption({
+      tooltip: { trigger: 'axis' },
+      grid: { left: 65, right: 40, top: 20, bottom: 40 },
+      xAxis: {
+        type: 'category',
+        data: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+        axisLabel: { fontSize: 10, color: COLORS.muted }
+      },
+      yAxis: {
+        type: 'value',
+        name: isZh ? '亿元' : '100M ¥',
+        axisLabel: { fontSize: 11, color: COLORS.muted },
+        nameTextStyle: { fontSize: 11, color: COLORS.muted }
+      },
+      series: [{
+        type: 'line',
+        data: [2410, 2910, 3280, 4650, 5220, 6120, 7050, 8230],
+        smooth: true,
+        lineStyle: { color: COLORS.primary, width: 3 },
+        itemStyle: { color: COLORS.primary },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: 'rgba(232, 85, 26, 0.25)' },
+            { offset: 1, color: 'rgba(232, 85, 26, 0.02)' }
+          ])
+        },
+        label: { show: true, position: 'top', fontSize: 10, color: COLORS.dark, formatter: function (p) { return p.value; } }
+      }]
+    });
+    charts.scale = chart;
+  }
+
+  /* ── Chart 4: Usage Frequency Pie ── */
+  function renderFrequencyPie() {
+    var dom = document.getElementById('chart-frequency');
+    if (!dom) return;
+    if (charts.freq) charts.freq.dispose();
+
+    var isZh = lang !== 'en';
+    var chart = echarts.init(dom);
+    chart.setOption({
+      tooltip: {
+        trigger: 'item',
+        formatter: function (p) {
+          return p.name + ': ' + p.value + (isZh ? '人 (' : ' people (') + p.percent + '%)';
+        }
+      },
+      legend: {
+        bottom: 0,
+        textStyle: { fontSize: 10, color: COLORS.muted }
+      },
+      series: [{
+        type: 'pie',
+        radius: ['45%', '78%'],
+        center: ['50%', '48%'],
+        avoidLabelOverlap: false,
+        itemStyle: { borderRadius: 4, borderColor: '#fff', borderWidth: 2 },
+        label: { formatter: '{b}\n{d}%', fontSize: 10 },
+        emphasis: { label: { fontSize: 14, fontWeight: 'bold' } },
+        data: [
+          { value: 5, name: isZh ? '几乎每天' : 'Almost daily', itemStyle: { color: COLORS.primary } },
+          { value: 7, name: isZh ? '一周3-5次' : '3-5/week', itemStyle: { color: COLORS.accent } },
+          { value: 10, name: isZh ? '一周1-2次' : '1-2/week', itemStyle: { color: COLORS.blue } },
+          { value: 6, name: isZh ? '偶尔/不点' : 'Rarely/Never', itemStyle: { color: COLORS.green } },
+          { value: 2, name: isZh ? '未填答' : 'No answer', itemStyle: { color: COLORS.muted } }
+        ]
+      }]
+    });
+    charts.freq = chart;
+  }
+
+  /* ── Chart 5: Food Categories Bar ── */
+  function renderCategoryBar() {
+    var dom = document.getElementById('chart-category');
+    if (!dom) return;
+    if (charts.cat) charts.cat.dispose();
+
+    var isZh = lang !== 'en';
+    var categories = isZh
+      ? ['中式快餐', '奶茶饮品', '炸鸡汉堡', '粉面粥', '麻辣烫/冒菜', '日料寿司', '烧烤', '甜品']
+      : ['Chinese Fast Food', 'Bubble Tea', 'Fried Chicken', 'Noodles/Congee', 'Malatang', 'Sushi', 'BBQ', 'Dessert'];
+
+    var chart = echarts.init(dom);
+    chart.setOption({
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      grid: { left: 55, right: 20, top: 20, bottom: 60 },
+      xAxis: {
+        type: 'category',
+        data: categories,
+        axisLabel: { fontSize: 9, rotate: 30, color: COLORS.muted }
+      },
+      yAxis: {
+        type: 'value',
+        name: isZh ? '选择人次' : 'Votes',
+        axisLabel: { fontSize: 11, color: COLORS.muted },
+        nameTextStyle: { fontSize: 11, color: COLORS.muted }
+      },
+      series: [{
+        type: 'bar',
+        data: [18, 15, 12, 10, 8, 6, 5, 4],
+        barWidth: '60%',
+        itemStyle: {
+          borderRadius: [6, 6, 0, 0],
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: COLORS.primary },
+            { offset: 1, color: COLORS.light }
+          ])
+        }
+      }]
+    });
+    charts.cat = chart;
+  }
+
+  /* ── Chart 6: Radar Chart ── */
+  function renderRadarChart() {
+    var dom = document.getElementById('chart-radar');
+    if (!dom) return;
+    if (charts.radar) charts.radar.dispose();
+
+    var isZh = lang !== 'en';
+    var chart = echarts.init(dom);
+    chart.setOption({
+      tooltip: {},
+      legend: {
+        bottom: 0,
+        data: [isZh ? '中国（北京）' : 'China (Beijing)', isZh ? '英国（伯明翰）' : 'UK (Birmingham)'],
+        textStyle: { fontSize: 11, color: COLORS.muted }
+      },
+      radar: {
+        center: ['50%', '52%'],
+        radius: '65%',
+        indicator: [
+          { name: isZh ? '速度' : 'Speed', max: 10 },
+          { name: isZh ? '品类丰富度' : 'Variety', max: 10 },
+          { name: isZh ? '价格实惠' : 'Affordability', max: 10 },
+          { name: isZh ? '配送可靠性' : 'Reliability', max: 10 },
+          { name: isZh ? '用户体验' : 'UX', max: 10 }
+        ]
+      },
+      series: [{
+        type: 'radar',
+        data: [
+          {
+            value: [9, 9, 9, 8, 8],
+            name: isZh ? '中国（北京）' : 'China (Beijing)',
+            areaStyle: { color: 'rgba(232, 85, 26, 0.2)' },
+            lineStyle: { color: COLORS.primary, width: 2 },
+            itemStyle: { color: COLORS.primary },
+            symbol: 'circle',
+            symbolSize: 5
+          },
+          {
+            value: [3, 4, 2, 3, 4],
+            name: isZh ? '英国（伯明翰）' : 'UK (Birmingham)',
+            areaStyle: { color: 'rgba(107, 107, 107, 0.15)' },
+            lineStyle: { color: COLORS.muted, width: 2 },
+            itemStyle: { color: COLORS.muted },
+            symbol: 'circle',
+            symbolSize: 5
+          }
+        ]
+      }]
+    });
+    charts.radar = chart;
+  }
+
+  /* ── Chart 7: Rider Income Pie ── */
+  function renderRiderIncome() {
+    var dom = document.getElementById('chart-rider-income');
+    if (!dom) return;
+    if (charts.income) charts.income.dispose();
+
+    var isZh = lang !== 'en';
+    var chart = echarts.init(dom);
+    chart.setOption({
+      tooltip: {
+        trigger: 'item',
+        formatter: function (p) {
+          return p.name + ': ¥' + p.value + ' (' + p.percent + '%)';
+        }
+      },
+      legend: {
+        bottom: 0,
+        textStyle: { fontSize: 10, color: COLORS.muted }
+      },
+      series: [{
+        type: 'pie',
+        radius: ['50%', '78%'],
+        center: ['50%', '48%'],
+        itemStyle: { borderRadius: 4, borderColor: '#fff', borderWidth: 2 },
+        label: { formatter: '{b}\n¥{c}', fontSize: 10 },
+        emphasis: { label: { fontSize: 14, fontWeight: 'bold' } },
+        data: [
+          { value: 5200, name: isZh ? '基础配送费' : 'Base delivery fee', itemStyle: { color: COLORS.primary } },
+          { value: 1200, name: isZh ? '距离/重量补贴' : 'Distance/weight bonus', itemStyle: { color: COLORS.accent } },
+          { value: 800, name: isZh ? '全勤奖励' : 'Attendance bonus', itemStyle: { color: COLORS.blue } },
+          { value: 400, name: isZh ? '恶劣天气补贴' : 'Bad weather bonus', itemStyle: { color: COLORS.purple } },
+          { value: 300, name: isZh ? '顾客打赏' : 'Customer tips', itemStyle: { color: COLORS.green } }
+        ]
+      }]
+    });
+    charts.income = chart;
+  }
+
+  return {
+    init: init,
+    renderAll: renderAll,
+  };
+})();
+
+/* === map.js === */
+'use strict';
+
+/* ===== Map: Leaflet interactive delivery route map ===== */
+window.AppMap = (function () {
+  var map = null;
+  var routeLayer = null;
+  var markers = [];
+
+  function init() {
+    var mapEl = document.getElementById('map');
+    if (!mapEl) return;
+
+    map = L.map('map', {
+      center: [39.993, 116.305],
+      zoom: 14,
+      zoomControl: true,
+      attributionControl: true
+    });
+
+    /* Gaode tile layer */
+    L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+      subdomains: ['1', '2', '3', '4'],
+      attribution: '&copy; <a href="https://www.amap.com/">Gaode</a>',
+      maxZoom: 18
+    }).addTo(map);
+
+    /* Delivery route — pickup to 5 drop-off points */
+    var pickupPoint = [39.995, 116.305];
+    var dropPoints = [
+      [39.993, 116.308],
+      [39.991, 116.304],
+      [39.990, 116.301],
+      [39.992, 116.298],
+      [39.994, 116.296]
+    ];
+
+    /* Route line: pickup → each drop-off */
+    var allPoints = [pickupPoint].concat(dropPoints);
+    var routeLine = L.polyline(allPoints, {
+      color: '#e8551a',
+      weight: 4,
+      opacity: 0.8,
+      dashArray: null
+    }).addTo(map);
+
+    /* Pickup marker */
+    var pickupIcon = L.divIcon({
+      className: 'custom-div-icon',
+      html: '<div style="background:#e8551a;width:16px;height:16px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.3)"></div>',
+      iconSize: [16, 16],
+      iconAnchor: [8, 8]
+    });
+
+    L.marker(pickupPoint, { icon: pickupIcon })
+      .bindPopup('<b style="color:#e8551a">📍 ' + (window.AppI18n && window.AppI18n.getLang() !== 'en' ? '取餐点：校园美食街' : 'Pickup: Campus Food Street') + '</b><br><small>' + (window.AppI18n && window.AppI18n.getLang() !== 'en' ? '约11:00出发' : '~11:00 departure') + '</small>')
+      .addTo(map);
+    markers.push(pickupPoint);
+
+    /* Drop-off markers */
+    dropPoints.forEach(function (pt, i) {
+      var dropIcon = L.divIcon({
+        className: 'custom-div-icon',
+        html: '<div style="background:#2196F3;width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>',
+        iconSize: [12, 12],
+        iconAnchor: [6, 6]
+      });
+
+      var enLabel = 'Delivery #' + (i + 1) + '<br><small>~11:' + (10 + i * 10) + '</small>';
+      var zhLabel = '送达点 #' + (i + 1) + '<br><small>约11:' + (10 + i * 10) + '</small>';
+      L.marker(pt, { icon: dropIcon })
+        .bindPopup('<b style="color:#2196F3">' + (window.AppI18n && window.AppI18n.getLang() !== 'en' ? zhLabel : enLabel) + '</b>')
+        .addTo(map);
+      markers.push(pt);
+    });
+
+    /* Order density circles */
+    var densityAreas = [
+      { center: [39.993, 116.303], radius: 380, label: 'High-density order area' },
+      { center: [39.991, 116.300], radius: 300, label: 'Secondary order cluster' }
+    ];
+
+    densityAreas.forEach(function (area) {
+      L.circle(area.center, {
+        radius: area.radius,
+        color: '#f0973b',
+        fillColor: '#f0973b',
+        fillOpacity: 0.12,
+        weight: 1,
+        dashArray: '5,5'
+      }).addTo(map);
+    });
+
+    /* Ensure map renders properly */
+    setTimeout(function () {
+      map.invalidateSize();
+    }, 300);
+
+    /* Revalidate on window resize */
+    window.addEventListener('resize', function () {
+      if (map) map.invalidateSize();
+    });
+
+    /* Listen for language changes to update popups */
+    document.addEventListener('languageChanged', function () {
+      if (map) {
+        setTimeout(function () {
+          map.invalidateSize();
+        }, 100);
+      }
+    });
+  }
+
+  return {
+    init: init,
+  };
+})();
+
+/* === quiz.js === */
+'use strict';
+
+/* ===== Quiz: 6-question interactive delivery personality test ===== */
+window.AppQuiz = (function () {
+  var currentQuestion = 0;
+  var answers = [];  /* array of selected option indices */
+  var totalQuestions = 6;
+  var quizEl = null;
+
+  function init() {
+    quizEl = document.getElementById('quiz-box');
+    if (!quizEl) return;
+
+    bindEvents();
+    renderQuestion(0);
+  }
+
+  function bindEvents() {
+    /* Delegate click events for quiz options */
+    quizEl.addEventListener('click', function (e) {
+      var optBtn = e.target.closest('.quiz-box__opt');
+      if (optBtn) {
+        handleOptionClick(optBtn);
+        return;
+      }
+
+      var restartBtn = e.target.closest('#quiz-restart');
+      if (restartBtn) {
+        resetQuiz();
+        return;
+      }
+
+      var shareBtn = e.target.closest('#quiz-share');
+      if (shareBtn) {
+        handleShare();
+        return;
+      }
+    });
+
+    /* Keyboard support */
+    quizEl.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        var optBtn = e.target.closest('.quiz-box__opt');
+        if (optBtn) {
+          e.preventDefault();
+          handleOptionClick(optBtn);
+        }
+      }
+    });
+  }
+
+  function handleOptionClick(btn) {
+    var val = parseInt(btn.dataset.val);
+    if (isNaN(val)) return;
+
+    /* Mark selected */
+    var optsContainer = btn.parentElement;
+    optsContainer.querySelectorAll('.quiz-box__opt').forEach(function (b) {
+      b.classList.remove('quiz-box__opt--selected');
+    });
+    btn.classList.add('quiz-box__opt--selected');
+
+    /* Store answer after a brief delay for visual feedback */
+    setTimeout(function () {
+      answers[currentQuestion] = val;
+      if (currentQuestion < totalQuestions - 1) {
+        currentQuestion++;
+        renderQuestion(currentQuestion);
+      } else {
+        showResult();
+      }
+    }, 300);
+  }
+
+  function renderQuestion(index) {
+    var isZh = window.AppI18n ? window.AppI18n.getLang() !== 'en' : true;
+
+    /* Question keys */
+    var qKeys = ['s6_q1', 's6_q2', 's6_q3', 's6_q4', 's6_q5', 's6_q6'];
+    var optKeys = ['s6_q1_opts', 's6_q2_opts', 's6_q3_opts', 's6_q4_opts', 's6_q5_opts', 's6_q6_opts'];
+
+    var questionText = window.AppI18n ? window.AppI18n.getString(qKeys[index]) : qKeys[index];
+    var opts = window.AppI18n ? window.AppI18n.strings[isZh ? 'zh' : 'en'][optKeys[index]] : [];
+
+    /* Build progress dots */
+    var progressHTML = '<div class="quiz-box__progress">';
+    for (var i = 0; i < totalQuestions; i++) {
+      var cls = 'quiz-box__progress-dot';
+      if (i < index) cls += ' quiz-box__progress-dot--done';
+      else if (i === index) cls += ' quiz-box__progress-dot--current';
+      progressHTML += '<span class="' + cls + '"></span>';
+    }
+    progressHTML += '</div>';
+
+    /* Build options */
+    var optsHTML = '<div class="quiz-box__options" role="radiogroup" aria-label="' + questionText + '">';
+    opts.forEach(function (opt, i) {
+      var selected = answers[index] === i ? ' quiz-box__opt--selected' : '';
+      optsHTML += '<button class="quiz-box__opt' + selected + '" data-val="' + i + '" role="radio" aria-checked="' + (answers[index] === i ? 'true' : 'false') + '" tabindex="0">' + opt + '</button>';
+    });
+    optsHTML += '</div>';
+
+    /* Question count */
+    var countText = (isZh ? '第 ' : '') + (index + 1) + ' / ' + totalQuestions + (isZh ? ' 题' : '');
+
+    quizEl.innerHTML = '<p class="quiz-box__question">' + questionText + '</p>' +
+      '<p class="text-xs text-muted mb-md">' + countText + '</p>' +
+      progressHTML +
+      optsHTML +
+      '<div id="quiz-result-area"></div>';
+
+    /* Focus first option */
+    var firstOpt = quizEl.querySelector('.quiz-box__opt');
+    if (firstOpt) firstOpt.focus();
+  }
+
+  function showResult() {
+    var isZh = window.AppI18n ? window.AppI18n.getLang() !== 'en' : true;
+
+    /* Calculate personality type based on answers */
+    var type = calculateType(answers);
+    var resultKey = 's6_results.' + type;
+
+    /* Build nested key lookup */
+    var strings = window.AppI18n ? window.AppI18n.strings[isZh ? 'zh' : 'en'] : {};
+    var resultData = strings.s6_results ? strings.s6_results[type] : null;
+    if (!resultData) {
+      resultData = { label: 'Unknown', icon: '🍕', zh: '', en: '' };
+    }
+
+    var label = resultData.label;
+    var icon = resultData.icon;
+    var desc = isZh ? (resultData.zh || '') : (resultData.en || '');
+
+    var resultHTML =
+      '<div class="quiz-box__result quiz-box__result--show">' +
+      '<div style="font-size:48px;margin-bottom:8px">' + icon + '</div>' +
+      '<h3 style="color:var(--c-primary);margin-bottom:8px;font-size:1.3rem">' +
+      (window.AppI18n ? window.AppI18n.getString('s6_result_title') : '') + label +
+      '</h3>' +
+      '<p style="color:var(--c-text);font-size:0.95rem;line-height:1.7">' + desc + '</p>' +
+      '<div style="margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">' +
+      '<button id="quiz-restart" class="btn btn--outline">' + (window.AppI18n ? window.AppI18n.getString('s6_restart') : 'Retake') + '</button>' +
+      '<button id="quiz-share" class="btn btn--primary">' + (window.AppI18n ? window.AppI18n.getString('s6_share_btn') : 'Share') + '</button>' +
+      '</div></div>';
+
+    quizEl.innerHTML =
+      '<div class="quiz-box__progress">' +
+      Array(totalQuestions).fill('<span class="quiz-box__progress-dot quiz-box__progress-dot--done"></span>').join('') +
+      '</div>' +
+      resultHTML +
+      '<p class="text-xs text-muted" style="margin-top:12px">' +
+      (window.AppI18n ? window.AppI18n.getString('s6_note') : '') +
+      '</p>';
+  }
+
+  function calculateType(ans) {
+    /* Simple scoring:
+       ans[0] = frequency (0=heavy → dependent/explorer)
+       ans[1] = priority (0=speed,1=price,2=variety,3=rating)
+       ans[2] = time (0=lunch,1=dinner,2=late night,3=irregular)
+       ans[3] = dine-in reason (0=social,1=relax,2=fee,3=not available)
+       ans[4] = rider interaction (0=thanks,1=door,2=none,3=chat)
+       ans[5] = if stopped (0=devastated,1=adapt,2=whatever,3=cook)
+
+       Score mapping:
+       - dependent: high frequency (0) + devastated if stopped (0)
+       - explorer: variety priority (2) + irregular timing (3)
+       - social: social dine-in reason (0) + chats with riders (3) + low frequency
+       - rational: moderate frequency + would adapt (1)
+    */
+
+    var score = {
+      dependent: 0,
+      explorer: 0,
+      social: 0,
+      rational: 0
+    };
+
+    /* Frequency → dependent/explorer */
+    if (ans[0] === 0) { score.dependent += 3; score.explorer += 1; }
+    if (ans[0] === 1) { score.dependent += 2; score.explorer += 1; }
+    if (ans[0] === 2) { score.rational += 2; score.social += 1; }
+    if (ans[0] === 3) { score.rational += 3; }
+
+    /* Priority */
+    if (ans[1] === 0) score.dependent += 1;
+    if (ans[1] === 1) score.rational += 2;
+    if (ans[1] === 2) score.explorer += 3;
+    if (ans[1] === 3) score.explorer += 1;
+
+    /* Time */
+    if (ans[2] === 0) score.rational += 1;
+    if (ans[2] === 1) score.rational += 1;
+    if (ans[2] === 2) { score.dependent += 2; score.explorer += 1; }
+    if (ans[2] === 3) score.explorer += 2;
+
+    /* Dine-in reason */
+    if (ans[3] === 0) score.social += 3;
+    if (ans[3] === 1) score.rational += 2;
+    if (ans[3] === 2) score.rational += 1;
+    if (ans[3] === 3) score.explorer += 2;
+
+    /* Rider interaction */
+    if (ans[4] === 0) score.social += 1;
+    if (ans[4] === 1) score.dependent += 1;
+    if (ans[4] === 2) score.rational += 1;
+    if (ans[4] === 3) score.social += 3;
+
+    /* If stopped */
+    if (ans[5] === 0) score.dependent += 3;
+    if (ans[5] === 1) score.rational += 2;
+    if (ans[5] === 2) score.rational += 1;
+    if (ans[5] === 3) score.rational += 3;
+
+    /* Find max */
+    var maxType = 'rational';
+    var maxScore = 0;
+    Object.keys(score).forEach(function (k) {
+      if (score[k] > maxScore) {
+        maxScore = score[k];
+        maxType = k;
+      }
+    });
+
+    return maxType;
+  }
+
+  function resetQuiz() {
+    currentQuestion = 0;
+    answers = [];
+    renderQuestion(0);
+  }
+
+  function handleShare() {
+    /* Web Share API if available, otherwise copy to clipboard */
+    var isZh = window.AppI18n ? window.AppI18n.getLang() !== 'en' : true;
+    var type = calculateType(answers);
+    var strings = window.AppI18n ? window.AppI18n.strings[isZh ? 'zh' : 'en'] : {};
+    var resultData = strings.s6_results ? strings.s6_results[type] : null;
+    var label = resultData ? resultData.label : 'Unknown';
+    var shareText = (window.AppI18n ? window.AppI18n.getString('s6_share_title') : 'My Delivery Personality') +
+      ': ' + label + ' — ' +
+      (window.AppI18n ? window.AppI18n.getString('s6_share_via') : '');
+
+    if (navigator.share) {
+      navigator.share({
+        title: isZh ? '我的外卖人格' : 'My Delivery Personality',
+        text: shareText,
+      }).catch(function () {
+        /* User cancelled — no action needed */
+      });
+    } else {
+      /* Fallback: copy to clipboard */
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareText).then(function () {
+          alert(isZh ? '已复制到剪贴板！' : 'Copied to clipboard!');
+        }).catch(function () {
+          alert(shareText);
+        });
+      } else {
+        alert(shareText);
+      }
+    }
+  }
+
+  /* Listen for language changes to re-render */
+  document.addEventListener('languageChanged', function () {
+    if (answers.length === 0 || currentQuestion < totalQuestions - 1 && answers.length < totalQuestions) {
+      /* Still in quiz — re-render current question */
+      if (answers.length === 0) {
+        renderQuestion(0);
+      } else if (answers.length < totalQuestions) {
+        currentQuestion = answers.length;
+        renderQuestion(currentQuestion);
+      }
+    } else if (answers.length === totalQuestions) {
+      /* Show result in new language */
+      showResult();
+    }
+  });
+
+  return {
+    init: init,
+  };
+})();
+
+/* === gallery.js === */
+'use strict';
+
+/* ===== Gallery: Swiper.js image gallery ===== */
+window.AppGallery = (function () {
+  var swiper = null;
+
+  function init() {
+    var el = document.querySelector('.swiper');
+    if (!el || typeof Swiper === 'undefined') return;
+
+    swiper = new Swiper('.swiper', {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      loop: true,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+      a11y: {
+        prevSlideMessage: 'Previous slide',
+        nextSlideMessage: 'Next slide',
+        firstSlideMessage: 'This is the first slide',
+        lastSlideMessage: 'This is the last slide',
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 24,
+        },
+      }
+    });
+  }
+
+  return {
+    init: init,
+  };
+})();
+
+/* === video.js === */
+'use strict';
+
+/* ===== Video: Custom video player with bilingual captions support ===== */
+window.AppVideo = (function () {
+  function init() {
+    var videoEl = document.getElementById('main-video');
+    if (!videoEl) return;
+
+    /* Basic custom controls: keyboard shortcuts */
+    videoEl.addEventListener('keydown', function (e) {
+      switch (e.key) {
+        case ' ':
+        case 'k':
+          e.preventDefault();
+          if (videoEl.paused) {
+            videoEl.play();
+          } else {
+            videoEl.pause();
+          }
+          break;
+        case 'ArrowLeft':
+          videoEl.currentTime = Math.max(0, videoEl.currentTime - 5);
+          break;
+        case 'ArrowRight':
+          videoEl.currentTime = Math.min(videoEl.duration, videoEl.currentTime + 5);
+          break;
+        case 'm':
+          videoEl.muted = !videoEl.muted;
+          break;
+        case 'f':
+          if (document.fullscreenEnabled) {
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            } else {
+              videoEl.requestFullscreen();
+            }
+          }
+          break;
+      }
+    });
+
+    /* Add captions track placeholder note */
+    var trackEl = videoEl.querySelector('track');
+    if (!trackEl) {
+      /* In production, add proper WebVTT captions */
+      console.log('Video captions: Add WebVTT track for bilingual subtitles.');
+    }
+  }
+
+  return {
+    init: init,
+  };
+})();
+
+/* === main.js === */
+'use strict';
+
+/* ===== Main: Entry point — initializes all modules ===== */
+(function () {
+  /* Wait for DOM */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
+
+  function initAll() {
+    /* 1. i18n: Set initial language */
+    var lang = window.AppI18n ? window.AppI18n.detectLang() : 'zh';
+    if (window.AppI18n) {
+      window.AppI18n.setLang(lang);
+    }
+
+    /* 2. Bind language switcher buttons */
+    var btnZh = document.getElementById('btn-zh');
+    var btnEn = document.getElementById('btn-en');
+    if (btnZh) {
+      btnZh.addEventListener('click', function () {
+        if (window.AppI18n) window.AppI18n.setLang('zh');
+      });
+    }
+    if (btnEn) {
+      btnEn.addEventListener('click', function () {
+        if (window.AppI18n) window.AppI18n.setLang('en');
+      });
+    }
+
+    /* 3. Initialize navigation */
+    if (window.AppNavigation) {
+      window.AppNavigation.init();
+    }
+
+    /* 4. Initialize charts */
+    if (window.AppCharts) {
+      window.AppCharts.init(lang);
+    }
+
+    /* 5. Initialize map */
+    if (window.AppMap) {
+      window.AppMap.init();
+    }
+
+    /* 6. Initialize quiz */
+    if (window.AppQuiz) {
+      window.AppQuiz.init();
+    }
+
+    /* 7. Initialize gallery */
+    if (window.AppGallery) {
+      window.AppGallery.init();
+    }
+
+    /* 8. Initialize video */
+    if (window.AppVideo) {
+      window.AppVideo.init();
+    }
+
+    /* 9. Scroll-triggered animations */
+    initScrollAnimations();
+
+    /* 10. Animated counter (Scene 1) */
+    initCounters();
+
+    console.log('%c🛵 30-Minute Miracle %cReady %c| Lang: ' + lang,
+      'color:#e8551a;font-weight:bold', '', 'color:#6b6b6b');
+  }
+
+  /* ── Scroll-triggered animations ── */
+  function initScrollAnimations() {
+    var observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -50px 0px',
+      threshold: 0.1
+    };
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-on-scroll--visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
+  /* ── Animated counters ── */
+  function initCounters() {
+    var counterEls = document.querySelectorAll('.counter[data-target]');
+    if (!counterEls.length) return;
+
+    var observerOptions = {
+      root: null,
+      threshold: 0.5
+    };
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    counterEls.forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
+  function animateCounter(el) {
+    var target = parseInt(el.dataset.target);
+    var duration = parseInt(el.dataset.duration) || 2000;
+    var steps = 60;
+    var stepValue = target / steps;
+    var stepTime = duration / steps;
+    var current = 0;
+
+    var timer = setInterval(function () {
+      current += stepValue;
+      if (current >= target) {
+        el.textContent = target;
+        clearInterval(timer);
+      } else {
+        el.textContent = Math.floor(current);
+      }
+    }, stepTime);
+  }
+})();
+
+</script>
+</body>
+</html>
